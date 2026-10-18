@@ -192,6 +192,28 @@ async function tutor(request, response) {
   }
 }
 
+async function checkSupabase(response) {
+  const projectUrl = process.env.SUPABASE_URL;
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+  if (!projectUrl || !publishableKey) {
+    sendJson(response, 200, { configured: false, connected: false });
+    return;
+  }
+
+  try {
+    const base = new URL(projectUrl);
+    if (base.protocol !== 'https:') throw new Error('INVALID_PROJECT_URL');
+    const healthUrl = new URL('/auth/v1/health', base);
+    const result = await fetch(healthUrl, {
+      headers: { 'apikey': publishableKey },
+      signal: AbortSignal.timeout(10_000)
+    });
+    sendJson(response, 200, { configured: true, connected: result.ok });
+  } catch {
+    sendJson(response, 200, { configured: true, connected: false });
+  }
+}
+
 async function serveFile(pathname, response) {
   const allowed = new Map([
     ['/', ['index.html', 'text/html; charset=utf-8']],
@@ -220,6 +242,10 @@ async function serveFile(pathname, response) {
 
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
+  if (request.method === 'GET' && url.pathname === '/api/supabase-status') {
+    await checkSupabase(response);
+    return;
+  }
   if (request.method === 'POST' && url.pathname === '/api/tutor') {
     await tutor(request, response);
     return;
