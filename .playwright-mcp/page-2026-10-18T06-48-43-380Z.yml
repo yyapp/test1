@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "코드정원 TEACHER WORKSPACE" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - img [ref=e5]
+      - generic [ref=e7]:
+        - text: 코드정원
+        - generic [ref=e8]: TEACHER WORKSPACE
+    - generic [ref=e9]:
+      - generic [ref=e10]: DEMO DATA
+      - button "로그아웃" [ref=e11] [cursor=pointer]
+      - link "문제 풀이로 돌아가기" [ref=e12] [cursor=pointer]:
+        - /url: /
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - navigation "교사 메뉴" [ref=e15]:
+        - button "학습 현황" [ref=e16] [cursor=pointer]
+        - button "문제 관리" [ref=e17] [cursor=pointer]
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]: PYTHON BASIC / CLASS OVERVIEW
+            - heading "학생들의 배움이 자라는 중이에요." [level=1] [ref=e22]:
+              - text: 학생들의 배움이
+              - text: 자라는 중이에요.
+            - paragraph [ref=e23]: 문제 풀이 진행과 최근 학습 활동을 한눈에 살펴보세요.
+          - generic [ref=e24]:
+            - strong [ref=e25]: QUESTION BANK
+            - text: 공개된 문제만 학생의 풀이 화면에 표시됩니다.
+        - generic [ref=e26]:
+          - generic [ref=e27]: i
+          - generic [ref=e28]: 아래 내용은 교사용 화면 미리보기를 위한 더미 학습 기록입니다. 실제 학생의 성적이나 제출 코드는 표시되지 않으며, Auth 계정의 시연용 프로필 정보만 사용합니다.
+        - region "학급 요약" [ref=e29]:
+          - article [ref=e30]:
+            - generic [ref=e31]: 연습 학생
+            - generic [ref=e32]: "-"
+            - generic [ref=e33]: 시연용 계정
+          - article [ref=e34]:
+            - generic [ref=e35]: 평균 문제 완료율
+            - generic [ref=e36]: "-"
+            - generic [ref=e37]: 총 10문제 기준
+          - article [ref=e38]:
+            - generic [ref=e39]: 누적 제출
+            - generic [ref=e40]: "-"
+            - generic [ref=e41]: 테스트 데이터
+          - article [ref=e42]:
+            - generic [ref=e43]: 최근 24시간 활동
+            - generic [ref=e44]: "-"
+            - generic [ref=e45]: 최근 학습 기록 기준
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - generic [ref=e49]:
+                - heading "학생별 학습 현황" [level=2] [ref=e50]
+                - paragraph [ref=e51]: 진도와 학습 중인 주제를 확인하세요.
+              - generic [ref=e52]:
+                - searchbox "학생 이름 검색" [ref=e53]
+                - combobox "학생 필터" [ref=e54]:
+                  - option "전체 학생" [selected]
+                  - option "최근 활동"
+                  - option "진도 50% 이상"
+            - table [ref=e56]:
+              - rowgroup [ref=e57]:
+                - row "Supabase에서 더미 학습 기록을 불러오고 있어요..." [ref=e58]:
+                  - cell "Supabase에서 더미 학습 기록을 불러오고 있어요..." [ref=e59]
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - generic [ref=e62]:
+                - generic [ref=e63]:
+                  - heading "문제별 통과 현황" [level=2] [ref=e64]
+                  - paragraph [ref=e65]: 학생들이 어디까지 진행했는지 확인해요.
+                - button "불러오는 중" [disabled] [ref=e66]
+              - generic [ref=e67]:
+                - paragraph [ref=e68]:
+                  - strong [ref=e69]: "-"
+                  - generic [ref=e70]: 전체 통과 기록
+                - generic [ref=e72]: 기록을 모으고 있어요...
+              - generic [ref=e73]: 문제는 1번부터 10번까지 순서대로 표시됩니다.
+            - generic [ref=e74]:
+              - generic [ref=e76]:
+                - heading "최근 학습 활동" [level=2] [ref=e77]
+                - paragraph [ref=e78]: 더미 계정의 최근 제출 기록입니다.
+              - list [ref=e79]:
+                - listitem [ref=e80]: 활동 기록을 불러오고 있어요...
+        - paragraph [ref=e81]: 현재는 시연용 학습 기록만 표시합니다. 실제 학생 데이터 연결은 별도 단계에서 설정해야 합니다.
