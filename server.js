@@ -2,8 +2,6 @@ const http = require('node:http');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 
-delete process.env.SUPABASE_SECRET_KEY;
-
 const PORT = Number(process.env.PORT || 3000);
 const HOST = '0.0.0.0';
 const ROOT = __dirname;
@@ -216,10 +214,55 @@ async function checkSupabase(response) {
   }
 }
 
+async function getDemoStudents(response) {
+  const projectUrl = process.env.SUPABASE_URL;
+  const secretKey = process.env.SUPABASE_SECRET_KEY;
+  if (!projectUrl || !secretKey) {
+    sendJson(response, 503, { error: '더미 학습 자료를 불러올 수 없어요.' });
+    return;
+  }
+
+  try {
+    const usersUrl = new URL('/auth/v1/admin/users?page=1&per_page=100', projectUrl);
+    const result = await fetch(usersUrl, {
+      headers: { 'apikey': secretKey },
+      signal: AbortSignal.timeout(10_000)
+    });
+    if (!result.ok) throw new Error(`SUPABASE_${result.status}`);
+    const payload = await result.json();
+    const students = (payload.users || [])
+      .filter(user => /^python\.student0[1-5]@example\.com$/.test(user.email || '') && user.user_metadata?.demo === true)
+      .map(user => {
+        const record = user.user_metadata.demo_learning || {};
+        return {
+          name: String(user.user_metadata.display_name || '연습 학생').slice(0, 40),
+          solvedProblemIds: Array.isArray(record.solved_problem_ids) ? record.solved_problem_ids.filter(id => Number.isInteger(id) && id >= 1 && id <= 10) : [],
+          submissionCount: Number(record.submission_count) || 0,
+          studyMinutes: Number(record.study_minutes) || 0,
+          focus: String(record.focus || '기초 문제 풀이').slice(0, 40),
+          lastActiveAt: record.last_active_at || null,
+          recentSubmissions: Array.isArray(record.recent_submissions) ? record.recent_submissions.slice(0, 3).map(item => ({
+            problemTitle: String(item.problem_title || '파이썬 문제').slice(0, 80),
+            status: item.status === '통과' ? '통과' : '다시 도전',
+            attempts: Math.max(1, Number(item.attempts) || 1),
+            submittedAt: item.submitted_at || null
+          })) : []
+        };
+      })
+      .sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+    sendJson(response, 200, { demo: true, students });
+  } catch (error) {
+    console.error('Demo learning data request failed:', error.message);
+    sendJson(response, 502, { error: '더미 학습 자료를 불러오지 못했어요.' });
+  }
+}
+
 async function serveFile(pathname, response) {
   const allowed = new Map([
     ['/', ['index.html', 'text/html; charset=utf-8']],
     ['/index.html', ['index.html', 'text/html; charset=utf-8']],
+    ['/teacher', ['teacher.html', 'text/html; charset=utf-8']],
+    ['/teacher.html', ['teacher.html', 'text/html; charset=utf-8']],
     ['/__preview-bridge.js', ['__preview-bridge.js', 'text/javascript; charset=utf-8']]
   ]);
   const file = allowed.get(pathname);
@@ -246,6 +289,10 @@ const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
   if (request.method === 'GET' && url.pathname === '/api/supabase-status') {
     await checkSupabase(response);
+    return;
+  }
+  if (request.method === 'GET' && url.pathname === '/api/teacher/students') {
+    await getDemoStudents(response);
     return;
   }
   if (request.method === 'POST' && url.pathname === '/api/tutor') {
