@@ -1,11 +1,13 @@
 const http = require('node:http');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const { randomUUID } = require('node:crypto');
 
 const PORT = Number(process.env.PORT || 3000);
 const HOST = '0.0.0.0';
 const ROOT = __dirname;
-const MAX_BODY_BYTES = 24 * 1024;
+const PROBLEMS_PATH = path.join(ROOT, 'problems.json');
+const MAX_BODY_BYTES = 256 * 1024;
 const actions = new Set(['hint', 'error', 'compare', 'concept']);
 const hitCounts = new Map();
 const loginAttempts = new Map();
@@ -401,6 +403,110 @@ async function getDemoStudents(request, response) {
   }
 }
 
+async function readProblemStore() {
+  const store = JSON.parse(await fs.readFile(PROBLEMS_PATH, 'utf8'));
+  if (!Array.isArray(store.problems)) throw new Error('INVALID_PROBLEM_STORE');
+  return store.problems;
+}
+
+async function writeProblemStore(problems) {
+  const temporaryPath = `${PROBLEMS_PATH}.tmp`;
+  await fs.writeFile(temporaryPath, `${JSON.stringify({ problems }, null, 2)}\n`, 'utf8');
+  await fs.rename(temporaryPath, PROBLEMS_PATH);
+}
+
+function normalizeProblem(payload, id) {
+  if (!payload || typeof payload !== 'object') throw new Error('문제 정보를 확인해 주세요.');
+  const fields = ['title', 'subtitle', 'description', 'input', 'output', 'starter', 'solution'];
+  const limits = { title: 120, subtitle: 180, description: 8000, input: 4000, output: 8000, starter: 12000, solution: 20000 };
+  const problem = {};
+  for (const field of fields) {
+    if (typeof payload[field] !== 'string' || payload[field].length > limits[field]) throw new Error(`${field} 항목을 확인해 주세요.`);
+    problem[field] = payload[field];
+  }
+  if (!problem.title.trim() || !problem.description.trim() || !problem.solution.trim()) throw new Error('문제 제목, 본문, 모범 답안을 입력해 주세요.');
+  if (!Array.isArray(payload.tests) || payload.tests.length < 1 || payload.tests.length > 30) throw new Error('테스트케이스는 1개 이상 30개 이하로 등록해 주세요.');
+  problem.tests = payload.tests.map(test => {
+    if (!test || typeof test.input !== 'string' || typeof test.output !== 'string' || test.input.length > 8000 || test.output.length > 8000) {
+      throw new Error('각 테스트케이스의 입력과 출력은 8,000자 이내로 작성해 주세요.');
+    }
+    return { input: test.input, output: test.output };
+  });
+  if (typeof payload.published !== 'boolean') throw new Error('공개 여부를 선택해 주세요.');
+  problem.id = id || randomUUID();
+  problem.published = payload.published;
+  return problem;
+}
+
+async function manageProblems(request, response, problemId = null) {
+  const teacher = await getAuthenticatedTeacher(request, response);
+  if (!teacher) {
+    sendJson(response, 401, { error: '교사 계정으로 로그인해 주세요.' });
+    return;
+  }
+
+  try {
+    const problems = await readProblemStore();
+    if (request.method === 'GET' && !problemId) {
+      sendJson(response, 200, { problems });
+      return;
+    }
+    if (request.method === 'POST' && !problemId) {
+      const payload = await readJson(request);
+      const problem = normalizeProblem(payload);
+      problems.push(problem);
+      await writeProblemStore(problems);
+      sendJson(response, 201, { problem });
+      return;
+    }
+
+    const index = problems.findIndex(problem => problem.id === problemId);
+    if (index < 0) {
+      sendJson(response, 404, { error: '문제를 찾을 수 없어요.' });
+      return;
+    }
+    if (request.method === 'PUT') {
+      const payload = await readJson(request);
+      const problem = normalizeProblem(payload, problemId);
+      problems[index] = problem;
+      await writeProblemStore(problems);
+      sendJson(response, 200, { problem });
+      return;
+    }
+    if (request.method === 'DELETE') {
+      problems.splice(index, 1);
+      await writeProblemStore(problems);
+      sendJson(response, 200, { deleted: true });
+      return;
+    }
+    sendJson(response, 405, { error: '지원하지 않는 요청이에요.' });
+  } catch (error) {
+    if (error.message === 'BODY_TOO_LARGE') {
+      sendJson(response, 413, { error: '문제 정보가 너무 커요.' });
+      return;
+    }
+    if (error instanceof SyntaxError) {
+      sendJson(response, 400, { error: '문제 정보를 읽을 수 없어요.' });
+      return;
+    }
+    if (/^(?:title|subtitle|description|input|output|starter|solution) 항목/.test(error.message) || /^(?:문제|테스트케이스|각 테스트케이스|공개 여부)/.test(error.message)) {
+      sendJson(response, 400, { error: error.message });
+      return;
+    }
+    console.error('Problem management failed:', error.message);
+    sendJson(response, 500, { error: '문제를 저장하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
+  }
+}
+
+async function getPublicProblems(response) {
+  try {
+    const problems = await readProblemStore();
+    sendJson(response, 200, problems.filter(problem => problem.published).map(({ solution, ...problem }) => problem));
+  } catch {
+    sendJson(response, 500, { error: '문제 목록을 불러오지 못했어요.' });
+  }
+}
+
 async function serveFile(pathname, response) {
   const allowed = new Map([
     ['/', ['index.html', 'text/html; charset=utf-8']],
@@ -448,6 +554,21 @@ const server = http.createServer(async (request, response) => {
     await checkSupabase(response);
     return;
   }
+  if (request.method === 'GET' && url.pathname === '/api/problems') {
+    await getPublicProblems(response);
+    return;
+  }
+  if (url.pathname === '/api/teacher/problems') {
+    if (['GET', 'POST'].includes(request.method)) {
+      await manageProblems(request, response);
+      return;
+    }
+  }
+  const teacherProblemMatch = url.pathname.match(/^\/api\/teacher\/problems\/([^/]+)$/);
+  if (teacherProblemMatch && ['PUT', 'DELETE'].includes(request.method)) {
+    await manageProblems(request, response, decodeURIComponent(teacherProblemMatch[1]));
+    return;
+  }
   if (request.method === 'GET' && url.pathname === '/api/teacher/students') {
     await getDemoStudents(request, response);
     return;
@@ -460,7 +581,7 @@ const server = http.createServer(async (request, response) => {
     await serveFile(url.pathname, response);
     return;
   }
-  response.writeHead(405, { 'Allow': 'GET, POST' });
+  response.writeHead(405, { 'Allow': 'GET, POST, PUT, DELETE' });
   response.end('Method not allowed');
 });
 

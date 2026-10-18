@@ -20,6 +20,11 @@
     .login-shell{width:min(100%,460px);margin:clamp(54px,12vh,120px) auto 70px;padding:28px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#1b251e,#151b17);box-shadow:0 24px 70px #0003}.login-shell[hidden],#dashboardContent[hidden]{display:none!important}.login-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#2c3b2d;color:var(--green);font-size:17px;margin-bottom:17px}.login-kicker{font:10px var(--mono);color:var(--green);letter-spacing:.14em}.login-shell h1{font-size:28px;letter-spacing:-.05em;margin:8px 0}.login-copy{font-size:12px;color:var(--muted);margin:0 0 22px}.login-form{display:grid;gap:13px}.login-field{display:grid;gap:6px}.login-field label{font-size:11px;color:#c5d0c5}.login-field input{width:100%;height:44px;border:1px solid #3a473d;border-radius:8px;background:#101612;padding:0 12px;color:var(--text);font-size:13px}.login-field input::placeholder{color:#69756b}.login-submit{height:46px;border:0;border-radius:8px;background:var(--green);color:#1b2617;font-weight:700;font-size:13px;cursor:pointer;margin-top:3px}.login-submit:hover:not(:disabled){background:#c9ffa2}.login-submit:disabled{opacity:.6;cursor:wait}.login-error{display:none;color:#ffc2bb;background:#382724;border:1px solid #633d38;border-radius:8px;padding:9px 11px;font-size:11px}.login-hint{margin:15px 0 0;font-size:10px;color:var(--soft);line-height:1.6}.logout-button{min-height:36px;border:1px solid #455348;border-radius:7px;background:#1b231d;color:#d4dfd4;padding:6px 10px;font-size:10px;cursor:pointer}.logout-button:hover{border-color:#7a8b72;color:var(--green)}.teacher-name{font-size:10px;color:#c4d0c4}.teacher-name[hidden],.logout-button[hidden]{display:none}
     @media(max-width:700px){.login-shell{margin:52px auto;padding:22px}.teacher-name{display:none}}
   </style>
+  <style>
+    .dashboard-tabs{display:flex;gap:7px;margin:0 0 22px;border-bottom:1px solid var(--line)}.dashboard-tab{min-height:42px;padding:8px 13px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-size:12px;cursor:pointer}.dashboard-tab.active{border-color:var(--green);color:var(--green)}#overviewView[hidden],#problemManager[hidden]{display:none!important}.manager-heading{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:7px 0 20px}.manager-heading h1{font-size:30px;letter-spacing:-.05em;margin:4px 0}.manager-heading p{font-size:12px;color:var(--muted);margin:0}.manager-add{min-height:42px;padding:8px 13px;border:0;border-radius:8px;background:var(--green);color:#1b2617;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap}.manager-add:hover{background:#c9ffa2}.manager-grid{display:grid;grid-template-columns:minmax(220px,.62fr) minmax(0,1.55fr);gap:13px;align-items:start}.manager-list-panel,.manager-form-panel{border:1px solid var(--line);border-radius:12px;background:#171e19;overflow:hidden}.manager-list-head{padding:13px 14px;border-bottom:1px solid var(--line);color:var(--muted);font-size:10px;display:flex;justify-content:space-between}.manager-problem-list{display:grid;max-height:700px;overflow:auto;padding:6px}.manager-problem-item{display:flex;align-items:center;gap:9px;width:100%;min-height:48px;padding:8px 9px;border:1px solid transparent;border-radius:8px;background:transparent;text-align:left;cursor:pointer}.manager-problem-item:hover{background:#1d271f}.manager-problem-item.active{background:#263329;border-color:#405640}.manager-problem-number{font:10px var(--mono);color:#7e8c80}.manager-problem-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#dbe3d9}.visibility-tag{font-size:8px;border:1px solid #405040;border-radius:12px;padding:2px 6px;color:var(--green);white-space:nowrap}.visibility-tag.draft{color:var(--orange);border-color:#655337}.manager-empty{padding:18px 12px;color:var(--soft);font-size:11px;text-align:center}.manager-form-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.manager-form-head strong{font-size:12px}.manager-form-head span{font-size:10px;color:var(--muted)}.problem-form{display:grid;gap:13px;padding:16px}.problem-form label{display:grid;gap:6px;font-size:10px;color:#c3cec4}.problem-form input[type=text],.problem-form textarea{width:100%;border:1px solid #354239;border-radius:7px;background:#111713;color:var(--text);padding:9px 10px;font-size:12px;line-height:1.55;resize:vertical}.problem-form input[type=text]{height:38px}.problem-form textarea:focus,.problem-form input:focus{outline:2px solid #789666;outline-offset:1px}.problem-form textarea{min-height:83px}.problem-form .code-area{min-height:145px;font:11px/1.65 var(--mono);tab-size:4}.problem-form .description-area{min-height:132px}.sample-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.form-section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 0}.form-section-head h3{font-size:12px;margin:0}.form-section-head button,.case-remove{min-height:34px;padding:5px 9px;border:1px solid #3a493d;border-radius:7px;background:#1e2821;color:#cbd7cb;font-size:10px;cursor:pointer}.form-section-head button:hover,.case-remove:hover{border-color:#728b67;color:var(--green)}.test-case-list{display:grid;gap:9px}.test-case-editor{border:1px solid #2d3930;border-radius:8px;padding:10px}.test-case-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.test-case-top strong{font:10px var(--mono);color:var(--green)}.test-case-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.test-case-fields textarea{min-height:70px;font:10px/1.55 var(--mono)}.publish-control{display:flex!important;align-items:center;gap:9px!important;padding:11px 12px;border:1px solid #354239;border-radius:8px;background:#141a16}.publish-control input{width:17px;height:17px;accent-color:#b4f27b}.publish-copy strong{display:block;color:#e1e9df;font-size:11px}.publish-copy small{display:block;color:var(--soft);font-size:9px;margin-top:2px}.manager-actions{display:flex;align-items:center;gap:8px;padding-top:11px;border-top:1px solid var(--line)}.manager-save{min-height:42px;flex:1;border:0;border-radius:8px;background:var(--green);color:#1b2617;font-size:12px;font-weight:700;cursor:pointer}.manager-save:hover:not(:disabled){background:#c9ffa2}.manager-save:disabled{opacity:.6;cursor:wait}.manager-delete{min-height:42px;padding:8px 12px;border:1px solid #62413b;border-radius:8px;background:#2b201e;color:#ffc0b9;font-size:11px;cursor:pointer}.manager-delete:hover{background:#3b2825}.manager-delete:disabled{opacity:.4;cursor:not-allowed}.manager-feedback{min-height:18px;font-size:10px;color:var(--green)}.manager-feedback.error{color:var(--red)}
+    @media(max-width:900px){.manager-grid{grid-template-columns:1fr}.manager-problem-list{display:flex;max-height:none;overflow-x:auto}.manager-problem-item{flex:0 0 210px}}
+    @media(max-width:700px){.dashboard-tabs{margin-bottom:16px}.manager-heading{align-items:flex-start;margin:3px 0 14px}.manager-heading h1{font-size:24px}.manager-heading p{font-size:10px}.manager-add{min-height:40px;font-size:10px;padding:7px 10px}.manager-grid{gap:10px}.manager-form-head{padding:11px 12px}.problem-form{padding:12px;gap:11px}.sample-grid,.test-case-fields{grid-template-columns:1fr}.problem-form .code-area{min-height:130px}.test-case-fields textarea{min-height:64px}}
+  </style>
 </head>
 <body>
   <header class="topbar">
@@ -37,9 +42,11 @@
       <p class="login-hint">학생 계정은 로그인할 수 없어요. Supabase에서 교사 역할을 확인합니다.</p>
     </section>
     <div id="dashboardContent" hidden>
+    <nav class="dashboard-tabs" aria-label="교사 메뉴"><button class="dashboard-tab active" id="overviewTab" type="button">학습 현황</button><button class="dashboard-tab" id="problemTab" type="button">문제 관리</button></nav>
+    <div id="overviewView">
     <section class="intro">
       <div><div class="eyebrow">PYTHON BASIC / CLASS OVERVIEW</div><h1>학생들의 배움이<br>자라는 중이에요.</h1><p>문제 풀이 진행과 최근 학습 활동을 한눈에 살펴보세요.</p></div>
-      <div class="intro-aside"><strong>10 PROBLEMS</strong>파이썬 기초 문제를 차근차근 푸는 연습 과정입니다.</div>
+      <div class="intro-aside"><strong>QUESTION BANK</strong>공개된 문제만 학생의 풀이 화면에 표시됩니다.</div>
     </section>
     <div class="demo-note"><span class="note-mark">i</span><span>아래 내용은 교사용 화면 미리보기를 위한 더미 학습 기록입니다. 실제 학생의 성적이나 제출 코드는 표시되지 않으며, Auth 계정의 시연용 프로필 정보만 사용합니다.</span></div>
     <section class="kpi-grid" aria-label="학급 요약">
@@ -67,6 +74,29 @@
       </div>
     </div>
     <p class="footer-note">현재는 시연용 학습 기록만 표시합니다. 실제 학생 데이터 연결은 별도 단계에서 설정해야 합니다.</p>
+    </div>
+    <section id="problemManager" hidden>
+      <div class="manager-heading"><div><div class="eyebrow">QUESTION BANK</div><h1>파이썬 문제 관리</h1><p>문제를 만들고, 내용을 고치고, 공개 여부를 정하세요.</p></div><button class="manager-add" id="newProblemButton" type="button">+ 새 문제</button></div>
+      <div class="manager-grid">
+        <section class="manager-list-panel" aria-label="등록된 문제 목록"><div class="manager-list-head"><span>등록된 문제</span><span id="managerProblemCount">0</span></div><div class="manager-problem-list" id="managerProblemList"><div class="manager-empty">문제를 불러오는 중이에요.</div></div></section>
+        <section class="manager-form-panel">
+          <div class="manager-form-head"><strong id="formHeading">새 문제</strong><span>시작 코드와 모범 답안은 학생 화면에 공개되지 않아요.</span></div>
+          <form class="problem-form" id="problemForm">
+            <label>문제 제목<input type="text" id="editTitle" maxlength="120" required placeholder="예: 두 수의 합"></label>
+            <label>짧은 설명<input type="text" id="editSubtitle" maxlength="180" placeholder="문제 목록에 함께 보여요"></label>
+            <label>문제 본문<textarea id="editDescription" class="description-area" maxlength="8000" required placeholder="문제를 풀 학생에게 보여줄 설명을 적어주세요."></textarea></label>
+            <div class="sample-grid"><label>공개 예시 입력<textarea id="editInput" maxlength="4000" placeholder="예시 입력"></textarea></label><label>공개 예시 출력<textarea id="editOutput" maxlength="8000" placeholder="예시 출력"></textarea></label></div>
+            <label>시작 코드<textarea id="editStarter" class="code-area" maxlength="12000" spellcheck="false" placeholder="# 학생에게 제공할 코드"></textarea></label>
+            <label>모범 답안 코드<textarea id="editSolution" class="code-area" maxlength="20000" spellcheck="false" required placeholder="# 채점 기준이 되는 답안"></textarea></label>
+            <div class="form-section-head"><h3>테스트케이스</h3><button id="addTestCaseButton" type="button">+ 테스트 추가</button></div>
+            <div class="test-case-list" id="testCaseList"></div>
+            <label class="publish-control"><input type="checkbox" id="editPublished"><span class="publish-copy"><strong>학생에게 공개</strong><small>공개한 문제만 학생 풀이 화면에 표시됩니다.</small></span></label>
+            <div class="manager-feedback" id="managerFeedback" role="status" aria-live="polite"></div>
+            <div class="manager-actions"><button class="manager-delete" id="deleteProblemButton" type="button" disabled>삭제</button><button class="manager-save" id="saveProblemButton" type="submit">문제 저장</button></div>
+          </form>
+        </section>
+      </div>
+    </section>
     </div>
   </main>
   <script>
@@ -97,7 +127,46 @@
       catch(error){$('loadError').textContent=error.message||'학습 기록을 불러오지 못했어요.';$('loadError').style.display='block';$('studentRows').innerHTML='<tr><td colspan="6" class="empty-row">연결을 확인한 뒤 새로고침을 눌러주세요.</td></tr>';$('problemBars').innerHTML='<div class="loading-state">기록을 불러오지 못했어요.</div>';$('activityList').innerHTML='<li class="loading-state">활동 기록을 불러오지 못했어요.</li>'}
       finally{$('refreshButton').disabled=false;$('refreshButton').textContent='새로고침'}
     }
+    let adminProblems=[],selectedProblemId=null,formSnapshot='',managerLoaded=false;
+    function collectProblemForm(){return {title:$('editTitle').value,subtitle:$('editSubtitle').value,description:$('editDescription').value,input:$('editInput').value,output:$('editOutput').value,starter:$('editStarter').value,solution:$('editSolution').value,published:$('editPublished').checked,tests:[...document.querySelectorAll('.test-case-editor')].map(row=>({input:row.querySelector('[data-test-input]').value,output:row.querySelector('[data-test-output]').value}))}}
+    function problemFormDirty(){return Boolean(formSnapshot)&&JSON.stringify(collectProblemForm())!==formSnapshot}
+    function showManagerFeedback(message,isError=false){$('managerFeedback').textContent=message;$('managerFeedback').classList.toggle('error',isError)}
+    function renderTestCases(tests){
+      $('testCaseList').innerHTML=tests.map((_,index)=>`<div class="test-case-editor"><div class="test-case-top"><strong>TEST ${String(index+1).padStart(2,'0')}</strong><button class="case-remove" type="button" data-remove-case="${index}">삭제</button></div><div class="test-case-fields"><label>입력<textarea data-test-input placeholder="테스트 입력"></textarea></label><label>기대 출력<textarea data-test-output placeholder="기대하는 출력"></textarea></label></div></div>`).join('');
+      document.querySelectorAll('.test-case-editor').forEach((row,index)=>{row.querySelector('[data-test-input]').value=tests[index].input;row.querySelector('[data-test-output]').value=tests[index].output});
+    }
+    function renderManagerProblemList(){
+      $('managerProblemCount').textContent=adminProblems.length;
+      $('managerProblemList').innerHTML=adminProblems.length?adminProblems.map((problem,index)=>`<button class="manager-problem-item ${problem.id===selectedProblemId?'active':''}" type="button" data-problem-id="${escapeHtml(problem.id)}"><span class="manager-problem-number">${String(index+1).padStart(2,'0')}</span><span class="manager-problem-title">${escapeHtml(problem.title)}</span><span class="visibility-tag ${problem.published?'':'draft'}">${problem.published?'공개':'비공개'}</span></button>`).join(''):'<div class="manager-empty">등록된 문제가 없어요.<br>새 문제를 추가해 보세요.</div>';
+      document.querySelectorAll('.manager-problem-item').forEach(button=>button.addEventListener('click',()=>{if(problemFormDirty()&&!confirm('저장하지 않은 내용이 있어요. 이동할까요?'))return;fillProblem(adminProblems.find(problem=>problem.id===button.dataset.problemId))}));
+    }
+    function fillProblem(problem=null){
+      selectedProblemId=problem?.id||null;
+      $('formHeading').textContent=problem?problem.title:'새 문제';
+      $('editTitle').value=problem?.title||'';$('editSubtitle').value=problem?.subtitle||'';$('editDescription').value=problem?.description||'';$('editInput').value=problem?.input||'';$('editOutput').value=problem?.output||'';$('editStarter').value=problem?.starter||'';$('editSolution').value=problem?.solution||'';$('editPublished').checked=Boolean(problem?.published);
+      renderTestCases(problem?.tests?.length?problem.tests:[{input:'',output:''}]);$('deleteProblemButton').disabled=!problem;$('saveProblemButton').textContent=problem?'변경 내용 저장':'문제 저장';formSnapshot=JSON.stringify(collectProblemForm());showManagerFeedback('');renderManagerProblemList();
+    }
+    async function loadAdminProblems(preferredId=selectedProblemId){
+      try{const response=await fetch('/api/teacher/problems',{cache:'no-store',credentials:'same-origin'});const data=await response.json();if(response.status===401){showLogin(data.error||'교사로 다시 로그인해 주세요.');return}if(!response.ok)throw new Error(data.error||'문제 목록을 불러오지 못했어요.');adminProblems=data.problems||[];managerLoaded=true;const selected=adminProblems.find(problem=>problem.id===preferredId)||adminProblems[0]||null;fillProblem(selected)}catch(error){showManagerFeedback(error.message||'문제 목록을 불러오지 못했어요.',true)}
+    }
+    async function saveProblem(event){
+      event.preventDefault();const button=$('saveProblemButton');button.disabled=true;button.textContent='저장 중';showManagerFeedback('');
+      try{const method=selectedProblemId?'PUT':'POST',url=selectedProblemId?`/api/teacher/problems/${encodeURIComponent(selectedProblemId)}`:'/api/teacher/problems';const response=await fetch(url,{method,headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(collectProblemForm())});const data=await response.json();if(response.status===401){showLogin(data.error||'교사로 다시 로그인해 주세요.');return}if(!response.ok)throw new Error(data.error||'문제를 저장하지 못했어요.');await loadAdminProblems(data.problem.id);showManagerFeedback('문제를 저장했어요.')}
+      catch(error){showManagerFeedback(error.message||'문제를 저장하지 못했어요.',true)}finally{button.disabled=false;button.textContent=selectedProblemId?'변경 내용 저장':'문제 저장'}
+    }
+    async function deleteProblem(){
+      if(!selectedProblemId||!confirm('이 문제를 삭제할까요? 삭제한 문제는 복구할 수 없어요.'))return;
+      const id=selectedProblemId;const button=$('deleteProblemButton');button.disabled=true;showManagerFeedback('');
+      try{const response=await fetch(`/api/teacher/problems/${encodeURIComponent(id)}`,{method:'DELETE',credentials:'same-origin'});const data=await response.json();if(response.status===401){showLogin(data.error||'교사로 다시 로그인해 주세요.');return}if(!response.ok)throw new Error(data.error||'문제를 삭제하지 못했어요.');adminProblems=adminProblems.filter(problem=>problem.id!==id);fillProblem(adminProblems[0]||null);showManagerFeedback('문제를 삭제했어요.')}
+      catch(error){showManagerFeedback(error.message||'문제를 삭제하지 못했어요.',true)}finally{button.disabled=!selectedProblemId}
+    }
+    function openProblemManager(){if(problemFormDirty()&&!confirm('저장하지 않은 내용이 있어요. 이동할까요?'))return;$('overviewView').hidden=true;$('problemManager').hidden=false;$('overviewTab').classList.remove('active');$('problemTab').classList.add('active');if(!managerLoaded)loadAdminProblems()}
+    function openOverview(){if(problemFormDirty()&&!confirm('저장하지 않은 내용이 있어요. 이동할까요?'))return;$('problemManager').hidden=true;$('overviewView').hidden=false;$('problemTab').classList.remove('active');$('overviewTab').classList.add('active')}
     $('searchInput').addEventListener('input',renderRows);$('filterSelect').addEventListener('change',renderRows);$('refreshButton').addEventListener('click',loadDashboard);
+    $('overviewTab').addEventListener('click',openOverview);$('problemTab').addEventListener('click',openProblemManager);$('problemForm').addEventListener('submit',saveProblem);$('deleteProblemButton').addEventListener('click',deleteProblem);
+    $('newProblemButton').addEventListener('click',()=>{if(problemFormDirty()&&!confirm('저장하지 않은 내용이 있어요. 새 문제를 만들까요?'))return;fillProblem(null)});
+    $('addTestCaseButton').addEventListener('click',()=>{const tests=collectProblemForm().tests;tests.push({input:'',output:''});renderTestCases(tests);showManagerFeedback('')});
+    $('testCaseList').addEventListener('click',event=>{const button=event.target.closest('[data-remove-case]');if(!button)return;const tests=collectProblemForm().tests;if(tests.length===1){showManagerFeedback('테스트케이스는 최소 1개가 필요해요.',true);return}tests.splice(Number(button.dataset.removeCase),1);renderTestCases(tests);showManagerFeedback('')});
     $('loginForm').addEventListener('submit',async event=>{event.preventDefault();const button=$('loginSubmit');button.disabled=true;button.textContent='확인 중';$('loginError').style.display='none';try{const response=await fetch('/api/teacher/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({email:$('teacherEmail').value,password:$('teacherPassword').value})});const data=await response.json();if(!response.ok)throw new Error(data.error||'로그인하지 못했어요.');$('loginForm').reset();await showDashboard(data.name)}catch(error){$('loginError').textContent=error.message||'로그인에 실패했어요.';$('loginError').style.display='block'}finally{button.disabled=false;button.textContent='교사로 로그인'}});
     $('logoutButton').addEventListener('click',async()=>{try{await fetch('/api/teacher/logout',{method:'POST',credentials:'same-origin'})}finally{showLogin('로그아웃했어요.')}});
     async function checkTeacherSession(){try{const response=await fetch('/api/teacher/session',{credentials:'same-origin',cache:'no-store'});const data=await response.json();if(response.ok&&data.authenticated)await showDashboard(data.name);else showLogin()}catch{showLogin('로그인 상태를 확인하지 못했어요. 새로고침해 주세요.')}}

@@ -1,0 +1,254 @@
+{
+  "problems": [
+    {
+      "id": "p001",
+      "title": "인사말 출력하기",
+      "subtitle": "print()로 첫 문장을 화면에 보여줘요",
+      "description": "친구에게 건넬 인사말을 출력해 봅시다.\n\n아래 문장을 그대로 한 줄로 출력하는 프로그램을 작성하세요.\n출력할 때 문장 앞뒤에 다른 글자는 붙이지 마세요.",
+      "input": "",
+      "output": "안녕, 파이썬! 반가워.",
+      "starter": "# 인사말을 출력해 보세요\n",
+      "solution": "print(\"안녕, 파이썬! 반가워.\")",
+      "published": true,
+      "tests": [
+        {
+          "input": "",
+          "output": "안녕, 파이썬! 반가워."
+        },
+        {
+          "input": "",
+          "output": "안녕, 파이썬! 반가워."
+        },
+        {
+          "input": "",
+          "output": "안녕, 파이썬! 반가워."
+        }
+      ]
+    },
+    {
+      "id": "p002",
+      "title": "두 수의 합",
+      "subtitle": "입력받은 두 정수를 더해요",
+      "description": "두 개의 정수가 한 줄에 공백으로 구분되어 주어집니다.\n두 수의 합을 출력하세요.\n\n예를 들어 3과 5가 주어지면 8을 출력하면 됩니다.",
+      "input": "3 5",
+      "output": "8",
+      "starter": "a, b = map(int, input().split())\n\n# 두 수의 합을 출력하세요\n",
+      "solution": "a, b = map(int, input().split())\nprint(a + b)",
+      "published": true,
+      "tests": [
+        {
+          "input": "3 5",
+          "output": "8"
+        },
+        {
+          "input": "-2 7",
+          "output": "5"
+        },
+        {
+          "input": "100 250",
+          "output": "350"
+        }
+      ]
+    },
+    {
+      "id": "p003",
+      "title": "직사각형의 넓이",
+      "subtitle": "가로와 세로를 곱해 넓이를 구해요",
+      "description": "직사각형의 가로와 세로 길이가 각각 한 줄씩 주어집니다.\n직사각형의 넓이를 출력하세요.\n\n넓이 = 가로 × 세로",
+      "input": "7\n4",
+      "output": "28",
+      "starter": "width = int(input())\nheight = int(input())\n\n# 직사각형의 넓이를 출력하세요\n",
+      "solution": "width = int(input())\nheight = int(input())\nprint(width * height)",
+      "published": true,
+      "tests": [
+        {
+          "input": "7\n4",
+          "output": "28"
+        },
+        {
+          "input": "1\n9",
+          "output": "9"
+        },
+        {
+          "input": "12\n12",
+          "output": "144"
+        }
+      ]
+    },
+    {
+      "id": "p004",
+      "title": "짝수일까 홀수일까",
+      "subtitle": "나머지 연산으로 숫자의 특징을 찾아요",
+      "description": "정수 하나가 주어집니다.\n짝수라면 Even, 홀수라면 Odd를 출력하세요.\n\n힌트: 2로 나눈 나머지가 0인지 확인해 보세요.",
+      "input": "13",
+      "output": "Odd",
+      "starter": "number = int(input())\n\n# 짝수인지 홀수인지 출력하세요\n",
+      "solution": "number = int(input())\nif number % 2 == 0:\n    print(\"Even\")\nelse:\n    print(\"Odd\")",
+      "published": true,
+      "tests": [
+        {
+          "input": "13",
+          "output": "Odd"
+        },
+        {
+          "input": "8",
+          "output": "Even"
+        },
+        {
+          "input": "0",
+          "output": "Even"
+        }
+      ]
+    },
+    {
+      "id": "p005",
+      "title": "세 수 중 가장 큰 수",
+      "subtitle": "조건문으로 가장 큰 값을 찾아요",
+      "description": "세 정수가 한 줄에 공백으로 구분되어 주어집니다.\n세 수 중 가장 큰 수를 출력하세요.\n\n세 수는 서로 같을 수도 있습니다.",
+      "input": "12 5 19",
+      "output": "19",
+      "starter": "a, b, c = map(int, input().split())\n\n# 가장 큰 수를 출력하세요\n",
+      "solution": "a, b, c = map(int, input().split())\nprint(max(a, b, c))",
+      "published": true,
+      "tests": [
+        {
+          "input": "12 5 19",
+          "output": "19"
+        },
+        {
+          "input": "-3 -8 -1",
+          "output": "-1"
+        },
+        {
+          "input": "4 4 4",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "id": "p006",
+      "title": "1부터 N까지의 합",
+      "subtitle": "반복문으로 차곡차곡 더해요",
+      "description": "양의 정수 N이 주어집니다.\n1부터 N까지 모든 정수의 합을 출력하세요.\n\n예를 들어 N이 4라면 1 + 2 + 3 + 4의 결과인 10을 출력합니다.",
+      "input": "4",
+      "output": "10",
+      "starter": "n = int(input())\n\n# 1부터 n까지의 합을 출력하세요\n",
+      "solution": "n = int(input())\nprint(sum(range(1, n + 1)))",
+      "published": true,
+      "tests": [
+        {
+          "input": "4",
+          "output": "10"
+        },
+        {
+          "input": "1",
+          "output": "1"
+        },
+        {
+          "input": "100",
+          "output": "5050"
+        }
+      ]
+    },
+    {
+      "id": "p007",
+      "title": "구구단 한 줄",
+      "subtitle": "반복문으로 원하는 단을 출력해요",
+      "description": "정수 N이 주어집니다.\nN단의 결과를 1부터 9까지 아래 형식으로 한 줄씩 출력하세요.\n\n출력 형식: N x i = 결과\n곱하기 기호는 영문 소문자 x를 사용하세요.",
+      "input": "3",
+      "output": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n3 x 6 = 18\n3 x 7 = 21\n3 x 8 = 24\n3 x 9 = 27",
+      "starter": "n = int(input())\n\n# n단을 1부터 9까지 출력하세요\n",
+      "solution": "n = int(input())\nfor i in range(1, 10):\n    print(f\"{n} x {i} = {n * i}\")",
+      "published": true,
+      "tests": [
+        {
+          "input": "3",
+          "output": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n3 x 6 = 18\n3 x 7 = 21\n3 x 8 = 24\n3 x 9 = 27"
+        },
+        {
+          "input": "1",
+          "output": "1 x 1 = 1\n1 x 2 = 2\n1 x 3 = 3\n1 x 4 = 4\n1 x 5 = 5\n1 x 6 = 6\n1 x 7 = 7\n1 x 8 = 8\n1 x 9 = 9"
+        },
+        {
+          "input": "7",
+          "output": "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63"
+        }
+      ]
+    },
+    {
+      "id": "p008",
+      "title": "리스트의 평균",
+      "subtitle": "여러 점수의 평균을 계산해요",
+      "description": "첫째 줄에 점수의 개수 N이 주어집니다.\n둘째 줄에 N개의 점수가 공백으로 구분되어 주어집니다.\n점수들의 평균을 출력하세요.\n\n평균은 소수점 아래 숫자까지 출력해도 됩니다.",
+      "input": "4\n80 90 70 100",
+      "output": "85.0",
+      "starter": "n = int(input())\nscores = list(map(int, input().split()))\n\n# 점수들의 평균을 출력하세요\n",
+      "solution": "n = int(input())\nscores = list(map(int, input().split()))\nprint(sum(scores) / n)",
+      "published": true,
+      "tests": [
+        {
+          "input": "4\n80 90 70 100",
+          "output": "85.0"
+        },
+        {
+          "input": "3\n1 2 3",
+          "output": "2.0"
+        },
+        {
+          "input": "1\n77",
+          "output": "77.0"
+        }
+      ]
+    },
+    {
+      "id": "p009",
+      "title": "모음 세기",
+      "subtitle": "문자열을 하나씩 살펴봐요",
+      "description": "영어 소문자로 이루어진 단어가 주어집니다.\n단어에 들어 있는 모음(a, e, i, o, u)의 개수를 출력하세요.\n\n단어에는 알파벳만 들어 있습니다.",
+      "input": "education",
+      "output": "5",
+      "starter": "word = input().strip()\n\n# 모음의 개수를 세어 출력하세요\n",
+      "solution": "word = input().strip()\nprint(sum(char in \"aeiou\" for char in word))",
+      "published": true,
+      "tests": [
+        {
+          "input": "education",
+          "output": "5"
+        },
+        {
+          "input": "rhythm",
+          "output": "0"
+        },
+        {
+          "input": "beautiful",
+          "output": "5"
+        }
+      ]
+    },
+    {
+      "id": "p010",
+      "title": "거꾸로 읽어도 같은 단어",
+      "subtitle": "문자열을 뒤집어 비교해요",
+      "description": "영어 소문자 단어가 주어집니다.\n앞에서 읽어도 뒤에서 읽어도 같은 단어라면 YES, 아니라면 NO를 출력하세요.\n\n예를 들어 level은 YES, python은 NO입니다.",
+      "input": "level",
+      "output": "YES",
+      "starter": "word = input().strip()\n\n# 회문인지 확인해 출력하세요\n",
+      "solution": "word = input().strip()\nprint(\"YES\" if word == word[::-1] else \"NO\")",
+      "published": true,
+      "tests": [
+        {
+          "input": "level",
+          "output": "YES"
+        },
+        {
+          "input": "python",
+          "output": "NO"
+        },
+        {
+          "input": "a",
+          "output": "YES"
+        }
+      ]
+    }
+  ]
+}

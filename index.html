@@ -60,49 +60,30 @@
   <div class="loading-shade" id="loadingShade"><div class="loading-card"><div class="spinner"></div><strong id="loadingTitle">파이썬 실행 환경을 준비하고 있어요</strong><p id="loadingMessage">처음 실행할 때는 잠시 걸릴 수 있어요.</p></div></div><div class="toast" id="toast"></div>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
   <script>
-    const problems = [
-      {title:'인사말 출력하기',subtitle:'print()로 첫 문장을 화면에 보여줘요',description:'친구에게 건넬 인사말을 출력해 봅시다.\n\n아래 문장을 그대로 한 줄로 출력하는 프로그램을 작성하세요.\n출력할 때 문장 앞뒤에 다른 글자는 붙이지 마세요.',input:'',output:'안녕, 파이썬! 반가워.',starter:'# 인사말을 출력해 보세요\n'},
-      {title:'두 수의 합',subtitle:'입력받은 두 정수를 더해요',description:'두 개의 정수가 한 줄에 공백으로 구분되어 주어집니다.\n두 수의 합을 출력하세요.\n\n예를 들어 3과 5가 주어지면 8을 출력하면 됩니다.',input:'3 5',output:'8',starter:'a, b = map(int, input().split())\n\n# 두 수의 합을 출력하세요\n'},
-      {title:'직사각형의 넓이',subtitle:'가로와 세로를 곱해 넓이를 구해요',description:'직사각형의 가로와 세로 길이가 각각 한 줄씩 주어집니다.\n직사각형의 넓이를 출력하세요.\n\n넓이 = 가로 × 세로',input:'7\n4',output:'28',starter:'width = int(input())\nheight = int(input())\n\n# 직사각형의 넓이를 출력하세요\n'},
-      {title:'짝수일까 홀수일까',subtitle:'나머지 연산으로 숫자의 특징을 찾아요',description:'정수 하나가 주어집니다.\n짝수라면 Even, 홀수라면 Odd를 출력하세요.\n\n힌트: 2로 나눈 나머지가 0인지 확인해 보세요.',input:'13',output:'Odd',starter:'number = int(input())\n\n# 짝수인지 홀수인지 출력하세요\n'},
-      {title:'세 수 중 가장 큰 수',subtitle:'조건문으로 가장 큰 값을 찾아요',description:'세 정수가 한 줄에 공백으로 구분되어 주어집니다.\n세 수 중 가장 큰 수를 출력하세요.\n\n세 수는 서로 같을 수도 있습니다.',input:'12 5 19',output:'19',starter:'a, b, c = map(int, input().split())\n\n# 가장 큰 수를 출력하세요\n'},
-      {title:'1부터 N까지의 합',subtitle:'반복문으로 차곡차곡 더해요',description:'양의 정수 N이 주어집니다.\n1부터 N까지 모든 정수의 합을 출력하세요.\n\n예를 들어 N이 4라면 1 + 2 + 3 + 4의 결과인 10을 출력합니다.',input:'4',output:'10',starter:'n = int(input())\n\n# 1부터 n까지의 합을 출력하세요\n'},
-      {title:'구구단 한 줄',subtitle:'반복문으로 원하는 단을 출력해요',description:'정수 N이 주어집니다.\nN단의 결과를 1부터 9까지 아래 형식으로 한 줄씩 출력하세요.\n\n출력 형식: N x i = 결과\n곱하기 기호는 영문 소문자 x를 사용하세요.',input:'3',output:'3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n3 x 6 = 18\n3 x 7 = 21\n3 x 8 = 24\n3 x 9 = 27',starter:'n = int(input())\n\n# n단을 1부터 9까지 출력하세요\n'},
-      {title:'리스트의 평균',subtitle:'여러 점수의 평균을 계산해요',description:'첫째 줄에 점수의 개수 N이 주어집니다.\n둘째 줄에 N개의 점수가 공백으로 구분되어 주어집니다.\n점수들의 평균을 출력하세요.\n\n평균은 소수점 아래 숫자까지 출력해도 됩니다.',input:'4\n80 90 70 100',output:'85.0',starter:'n = int(input())\nscores = list(map(int, input().split()))\n\n# 점수들의 평균을 출력하세요\n'},
-      {title:'모음 세기',subtitle:'문자열을 하나씩 살펴봐요',description:'영어 소문자로 이루어진 단어가 주어집니다.\n단어에 들어 있는 모음(a, e, i, o, u)의 개수를 출력하세요.\n\n단어에는 알파벳만 들어 있습니다.',input:'education',output:'5',starter:'word = input().strip()\n\n# 모음의 개수를 세어 출력하세요\n'},
-      {title:'거꾸로 읽어도 같은 단어',subtitle:'문자열을 뒤집어 비교해요',description:'영어 소문자 단어가 주어집니다.\n앞에서 읽어도 뒤에서 읽어도 같은 단어라면 YES, 아니라면 NO를 출력하세요.\n\n예를 들어 level은 YES, python은 NO입니다.',input:'level',output:'YES',starter:'word = input().strip()\n\n# 회문인지 확인해 출력하세요\n'}
-    ];
-    const cases = [
-      [['','안녕, 파이썬! 반가워.'],['','안녕, 파이썬! 반가워.'],['','안녕, 파이썬! 반가워.']],
-      [['3 5','8'],['-2 7','5'],['100 250','350']],
-      [['7\n4','28'],['1\n9','9'],['12\n12','144']],
-      [['13','Odd'],['8','Even'],['0','Even']],
-      [['12 5 19','19'],['-3 -8 -1','-1'],['4 4 4','4']],
-      [['4','10'],['1','1'],['100','5050']],
-      [['3','3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n3 x 6 = 18\n3 x 7 = 21\n3 x 8 = 24\n3 x 9 = 27'],['1','1 x 1 = 1\n1 x 2 = 2\n1 x 3 = 3\n1 x 4 = 4\n1 x 5 = 5\n1 x 6 = 6\n1 x 7 = 7\n1 x 8 = 8\n1 x 9 = 9'],['7','7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n7 x 6 = 42\n7 x 7 = 49\n7 x 8 = 56\n7 x 9 = 63']],
-      [['4\n80 90 70 100','85.0'],['3\n1 2 3','2.0'],['1\n77','77.0']],
-      [['education','5'],['rhythm','0'],['beautiful','5']],
-      [['level','YES'],['python','NO'],['a','YES']]
-    ];
-    const starterCodes = problems.map(p=>p.starter);
     const $ = id => document.getElementById(id);
-    let current = 0, pyodide = null, busy = false, lastRun = null;
-    const hintLevels = Array(problems.length).fill(0);
-    const solved = new Set(JSON.parse(localStorage.getItem('codegarden-solved') || '[]'));
+    let problems=[],current=0,pyodide=null,busy=false,lastRun=null,hintLevels=[],solved=new Set();
     function renderList(){
-      $('problemList').innerHTML=problems.map((p,i)=>`<button class="problem-link ${i===current?'active':''}" data-index="${i}" aria-current="${i===current?'page':'false'}"><span class="problem-number">${String(i+1).padStart(2,'0')}</span><span class="problem-name">${p.title}</span>${solved.has(i)?'<span class="problem-check" aria-label="통과">✓</span>':''}</button>`).join('');
+      $('problemList').innerHTML=problems.length?problems.map((p,i)=>`<button class="problem-link ${i===current?'active':''}" data-index="${i}" aria-current="${i===current?'page':'false'}"><span class="problem-number">${String(i+1).padStart(2,'0')}</span><span class="problem-name">${escapeHtml(p.title)}</span>${solved.has(p.id)?'<span class="problem-check" aria-label="통과">✓</span>':''}</button>`).join(''):'<div class="result-empty">현재 공개된 문제가 없어요.</div>';
       document.querySelectorAll('.problem-link').forEach(button=>button.addEventListener('click',()=>selectProblem(Number(button.dataset.index))));
-      const count=solved.size;$('topProgress').textContent=`${count} / 10`;$('progressText').textContent=`${count} / 10 완료`;$('progressBar').style.width=`${count*10}%`;
+      const count=problems.filter(problem=>solved.has(problem.id)).length,total=problems.length;$('topProgress').textContent=`${count} / ${total}`;$('progressText').textContent=`${count} / ${total} 완료`;$('progressBar').style.width=`${total?count/total*100:0}%`;
     }
     function renderProblem(){
-      const p=problems[current];$('crumbIndex').textContent=String(current+1).padStart(2,'0');$('problemTitle').textContent=p.title;$('problemSubtitle').textContent=p.subtitle;$('problemDescription').textContent=p.description;
+      const p=problems[current];
+      if(!p){$('problemTitle').textContent='공개된 문제가 없어요';$('problemSubtitle').textContent='선생님이 문제를 공개하면 여기에 표시됩니다.';$('problemDescription').textContent='';$('exampleBox').innerHTML='';$('problemTip').textContent='';$('codeInput').value='';$('prevBtn').disabled=true;$('nextBtn').disabled=true;$('runBtn').disabled=true;renderList();updateLines();return}
+      $('runBtn').disabled=false;$('crumbIndex').textContent=String(current+1).padStart(2,'0');$('problemTitle').textContent=p.title;$('problemSubtitle').textContent=p.subtitle;$('problemDescription').textContent=p.description;
       $('exampleBox').innerHTML=`<div class="example-head"><span>입력 예시</span><span>출력 예시</span></div><div class="example-body"><div class="example-cell"><label>Input</label><pre>${escapeHtml(p.input||'(입력 없음)')}</pre></div><div class="example-cell"><label>Output</label><pre>${escapeHtml(p.output)}</pre></div></div>`;
-      $('problemTip').innerHTML=`<b>생각해 보기</b>　${current===0?'print() 함수에 출력하고 싶은 문장을 따옴표로 감싸 넣어보세요.':current===1?'input()으로 받은 값을 int()로 정수로 바꾸고 더해보세요.':current===2?'두 값을 곱하면 직사각형의 넓이를 구할 수 있어요.':current===3?'나머지 연산자 %를 이용하면 2로 나눈 나머지를 알 수 있어요.':current===4?'max() 함수를 사용하거나 if문으로 하나씩 비교해도 좋아요.':current===5?'for문과 range()로 1부터 n까지 반복할 수 있어요.':current===6?'반복문 안에서 i를 1부터 9까지 바꿔 곱해보세요.':current===7?'리스트의 합을 개수로 나누면 평균이에요.':current===8?'각 글자가 모음 목록에 포함되는지 확인해 보세요.':'문자열을 뒤집는 방법으로 word[::-1]을 쓸 수 있어요.'}`;
+      $('problemTip').innerHTML=`<b>생각해 보기</b>　문제에서 입력으로 주어지는 값과 출력 형식을 먼저 찾아보세요. 필요한 계산 순서를 말로 정리해 보면 좋아요.`;
       $('prevBtn').disabled=current===0;$('nextBtn').disabled=current===problems.length-1;renderList();updateLines();
     }
-    function selectProblem(index){if(index===current)return;current=index;lastRun=null;$('codeInput').value=starterCodes[index];$('resultBox').innerHTML='<div class="result-empty">코드를 작성하고 실행하면 채점 결과가 여기에 표시돼요.</div>';renderProblem();$('tutorResponse').classList.remove('visible')}
+    function selectProblem(index){if(index===current||!problems[index])return;current=index;lastRun=null;$('codeInput').value=problems[index].starter;$('resultBox').innerHTML='<div class="result-empty">코드를 작성하고 실행하면 채점 결과가 여기에 표시돼요.</div>';renderProblem();$('tutorResponse').classList.remove('visible')}
     function escapeHtml(text){return String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
     function updateLines(){const count=$('codeInput').value.split('\n').length;$('lineNumbers').innerHTML=Array.from({length:Math.max(count,18)},(_,i)=>`<span>${i+1}</span>`).join('')}
+    async function loadProblems(){
+      try{
+        const response=await fetch('/api/problems',{cache:'no-store'}),data=await response.json();if(!response.ok)throw new Error(data.error||'문제를 불러오지 못했어요.');problems=Array.isArray(data)?data:data.problems||[];
+        const saved=JSON.parse(localStorage.getItem('codegarden-solved')||'[]');solved=new Set(Array.isArray(saved)?saved.filter(id=>typeof id==='string'&&problems.some(problem=>problem.id===id)):[]);hintLevels=Array(problems.length).fill(0);current=0;$('codeInput').value=problems[0]?.starter||'';renderProblem();
+      }catch(error){$('problemTitle').textContent='문제를 불러오지 못했어요';$('problemSubtitle').textContent=error.message||'잠시 뒤 새로고침해 주세요.';$('runBtn').disabled=true}
+    }
     async function checkSupabase(){
       const row=$('supabaseCheck'),button=$('supabaseRetry'),text=$('supabaseStatusText');
       row.dataset.state='checking';text.textContent='Supabase 연결 확인 중';button.disabled=true;
@@ -116,18 +97,18 @@
       finally{button.disabled=false}
     }
     $('supabaseRetry').addEventListener('click',checkSupabase);
-    $('codeInput').value=starterCodes[0];renderProblem();
     $('codeInput').addEventListener('input',updateLines);$('codeInput').addEventListener('scroll',()=>{$('lineNumbers').scrollTop=$('codeInput').scrollTop});
     $('codeInput').addEventListener('keydown',event=>{if(event.key==='Tab'){event.preventDefault();const el=event.currentTarget,start=el.selectionStart,end=el.selectionEnd;el.setRangeText('    ',start,end,'end');updateLines()}if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();runCode()}});
     $('prevBtn').addEventListener('click',()=>selectProblem(Math.max(0,current-1)));$('nextBtn').addEventListener('click',()=>selectProblem(Math.min(problems.length-1,current+1)));
-    $('resetBtn').addEventListener('click',()=>{$('codeInput').value=starterCodes[current];$('resultBox').innerHTML='<div class="result-empty">예시 코드로 되돌렸어요. 이어서 작성해 보세요.</div>';updateLines();$('codeInput').focus()});
+    $('resetBtn').addEventListener('click',()=>{if(!problems[current])return;$('codeInput').value=problems[current].starter;$('resultBox').innerHTML='<div class="result-empty">예시 코드로 되돌렸어요. 이어서 작성해 보세요.</div>';updateLines();$('codeInput').focus()});
     let toastTimer;function showToast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2200)}
     function showLoading(title,message){$('loadingTitle').textContent=title;$('loadingMessage').textContent=message;$('loadingShade').classList.add('visible')}
     function showTutorResponse(label,message){$('tutorResponse').innerHTML=`<span class="tutor-response-label">${escapeHtml(label)}</span>${escapeHtml(message)}`;$('tutorResponse').classList.add('visible')}
     async function handleTutor(action){
       const label={hint:'힌트 보기',error:'오류 설명',compare:'결과 비교',concept:'개념 복습'}[action];
+      if(!problems[current]){showTutorResponse(label,'공개된 문제가 표시되면 도움을 요청할 수 있어요.');return}
       if(action==='hint'&&hintLevels[current]>=3){showTutorResponse(label,'힌트를 세 단계까지 확인했어요. 지금까지의 힌트를 바탕으로 직접 다음 단계를 시도해 보세요.');return}
-      if((action==='error'||action==='compare')&&(!lastRun||lastRun.problem!==current)){
+      if((action==='error'||action==='compare')&&(!lastRun||lastRun.problem!==problems[current]?.id)){
         showTutorResponse(label,'먼저 코드를 실행해 주세요. 실행 결과를 확인한 뒤 도움을 드릴게요.');return;
       }
       if((action==='error'||action==='compare')&&lastRun.source!==$('codeInput').value){
@@ -162,24 +143,25 @@
     }
     document.querySelectorAll('.tutor-button').forEach(button=>button.addEventListener('click',()=>handleTutor(button.dataset.tutor)));
     function renderResult(results,error){
-      lastRun={results,error,problem:current,source:$('codeInput').value};
+      lastRun={results,error,problem:problems[current]?.id,source:$('codeInput').value};
       const passed=results.filter(r=>r.ok).length,all=passed===results.length,box=$('resultBox');
       box.innerHTML=`<div class="result-state ${all?'pass':'fail'}"><div class="result-icon">${all?'✓':'!'}</div><div class="result-copy"><strong>${all?'모든 테스트를 통과했어요!':'조금 더 확인해 봐요'}</strong><span>${error?escapeHtml(error):all?'좋아요, 다음 문제로 넘어가도 좋아요.':'출력 결과를 예시와 비교해 보세요.'}</span></div><span class="result-count">${passed} / ${results.length}</span></div><div class="case-details">${results.map((r,i)=>`<div class="case-row"><span class="case-badge ${r.ok?'pass':'fail'}">${r.ok?'✓ 통과':'× 실패'}</span><span>테스트 ${i+1}</span>${!r.ok?`<span class="case-detail">기대: <code>${escapeHtml(r.expected||'(출력 없음)')}</code> · 내 결과: <code>${escapeHtml(r.actual||r.error||'(출력 없음)')}</code></span>`:''}</div>`).join('')}</div>`;
-      if(all){solved.add(current);localStorage.setItem('codegarden-solved',JSON.stringify([...solved]));renderList();if(current<problems.length-1)showToast('문제를 통과했어요! 다음 문제도 도전해 보세요.');else showToast('10문제를 모두 완료했어요! 대단해요.')}
+      if(all){solved.add(problems[current].id);localStorage.setItem('codegarden-solved',JSON.stringify([...solved]));renderList();if(current<problems.length-1)showToast('문제를 통과했어요! 다음 문제도 도전해 보세요.');else showToast('공개된 문제를 모두 완료했어요! 대단해요.')}
     }
     async function runCode(){
-      if(busy)return;const source=$('codeInput').value;if(!source.trim()){showToast('먼저 파이썬 코드를 입력해 주세요.');$('codeInput').focus();return}
+      if(busy||!problems[current])return;const source=$('codeInput').value;if(!source.trim()){showToast('먼저 파이썬 코드를 입력해 주세요.');$('codeInput').focus();return}
       busy=true;$('runBtn').disabled=true;$('runBtn').querySelector('span').textContent='채점 중...';$('resultBox').innerHTML='<div class="result-empty">테스트케이스를 확인하고 있어요...</div>';
       try{
         if(!pyodide){showLoading('파이썬 실행 환경을 준비하고 있어요','처음 실행할 때는 잠시 걸릴 수 있어요.');pyodide=await loadPyodide();$('loadingShade').classList.remove('visible')}
-        pyodide.globals.set('student_code',source);pyodide.globals.set('test_cases_json',JSON.stringify(cases[current]));
+        const tests=problems[current].tests.map(test=>[test.input,test.output]);pyodide.globals.set('student_code',source);pyodide.globals.set('test_cases_json',JSON.stringify(tests));
         const output=await pyodide.runPythonAsync(`import sys, io, json, contextlib\nresults = []\nfor test_input, expected in json.loads(test_cases_json):\n    captured = io.StringIO()\n    namespace = {'__name__': '__main__'}\n    try:\n        sys.stdin = io.StringIO(test_input)\n        with contextlib.redirect_stdout(captured):\n            exec(compile(student_code, '<solution>', 'exec'), namespace)\n        actual = captured.getvalue().strip()\n        wanted = expected.strip()\n        results.append({'ok': actual == wanted, 'actual': actual, 'expected': wanted})\n    except Exception as error:\n        results.append({'ok': False, 'actual': captured.getvalue().strip(), 'expected': expected.strip(), 'error': type(error).__name__ + ': ' + str(error)})\n    finally:\n        sys.stdin = sys.__stdin__\njson.dumps(results)`);
         renderResult(JSON.parse(output));
-      }catch(error){$('loadingShade').classList.remove('visible');renderResult(cases[current].map((test,i)=>({ok:false,actual:'',expected:test[1],error:i===0?(error.message||'실행 중 오류가 발생했어요.'):'앞선 실행 환경 오류'})),'파이썬 실행 환경을 불러오지 못했어요. 인터넷 연결을 확인하고 다시 실행해 주세요.')}
+      }catch(error){$('loadingShade').classList.remove('visible');renderResult(problems[current].tests.map((test,i)=>({ok:false,actual:'',expected:test.output,error:i===0?(error.message||'실행 중 오류가 발생했어요.'):'앞선 실행 환경 오류'})),'파이썬 실행 환경을 불러오지 못했어요. 인터넷 연결을 확인하고 다시 실행해 주세요.')}
       finally{busy=false;$('runBtn').disabled=false;$('runBtn').querySelector('span').textContent='코드 실행'}
     }
     $('runBtn').addEventListener('click',runCode);
     checkSupabase();
+    loadProblems();
   </script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - img [ref=e5]
+      - generic [ref=e7]:
+        - text: 코드정원
+        - generic [ref=e8]: PYTHON PRACTICE ROOM
+    - generic [ref=e9]:
+      - generic [ref=e11]: 0 / 0
+      - generic "학습자" [ref=e12]: 나
+  - main [ref=e13]:
+    - complementary "문제 목록" [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: PYTHON · BASIC
+        - heading "첫 번째 파이썬 정원" [level=2] [ref=e17]
+        - paragraph [ref=e18]: 차근차근 풀어보는 10개의 문제
+        - generic [ref=e20]:
+          - generic [ref=e21]: 나의 진행률
+          - generic [ref=e22]: 0 / 0 완료
+        - generic [ref=e23]:
+          - generic [ref=e26]: Supabase 연결 확인 중
+          - button "다시 확인" [disabled] [ref=e27]
+        - paragraph [ref=e28]: 현재는 연결 상태만 확인합니다. 로그인과 진도 저장은 아직 설정하지 않았어요.
+        - text: "{}"
+      - link "교사용 대시보드 →" [ref=e29] [cursor=pointer]:
+        - /url: /teacher
+        - generic [ref=e30]: 교사용 대시보드
+        - generic [ref=e31]: →
+      - navigation [ref=e32]:
+        - generic [ref=e33]: 현재 공개된 문제가 없어요.
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]: 파이썬 기초 / 01
+        - generic [ref=e37]:
+          - heading "공개된 문제가 없어요" [level=1] [ref=e38]
+          - generic [ref=e39]: 기초
+        - paragraph [ref=e40]: 선생님이 문제를 공개하면 여기에 표시됩니다.
+      - heading "예시" [level=2] [ref=e41]
+      - region "AI 튜터 도움말" [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - generic [ref=e47]: ✳
+            - text: AI 튜터
+          - generic [ref=e48]: SOLAR MINI 4
+        - paragraph [ref=e49]: 도움 요청 시 문제와 코드가 Upstage Solar로 전달돼요. 자유 채팅은 없어요.
+        - generic [ref=e50]:
+          - button "힌트 보기" [ref=e51] [cursor=pointer]
+          - button "오류 설명" [ref=e52] [cursor=pointer]
+          - button "결과 비교" [ref=e53] [cursor=pointer]
+          - button "개념 복습" [ref=e54] [cursor=pointer]
+      - generic [ref=e55]:
+        - button "← 이전 문제" [disabled] [ref=e56]
+        - button "다음 문제 →" [disabled] [ref=e57]
+    - region "파이썬 코드 편집기" [ref=e58]:
+      - generic [ref=e59]:
+        - generic [ref=e60]: solution.py
+        - generic [ref=e62]:
+          - generic [ref=e63]: Python 3
+          - generic [ref=e64]: ·
+          - generic [ref=e65]: UTF-8
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]: "1"
+          - generic [ref=e69]: "2"
+          - generic [ref=e70]: "3"
+          - generic [ref=e71]: "4"
+          - generic [ref=e72]: "5"
+          - generic [ref=e73]: "6"
+          - generic [ref=e74]: "7"
+          - generic [ref=e75]: "8"
+          - generic [ref=e76]: "9"
+          - generic [ref=e77]: "10"
+          - generic [ref=e78]: "11"
+          - generic [ref=e79]: "12"
+          - generic [ref=e80]: "13"
+          - generic [ref=e81]: "14"
+          - generic [ref=e82]: "15"
+          - generic [ref=e83]: "16"
+          - generic [ref=e84]: "17"
+          - generic [ref=e85]: "18"
+        - textbox "파이썬 코드 입력" [ref=e86]
+      - generic [ref=e87]:
+        - generic [ref=e88]: Tab 키로 들여쓰기
+        - generic [ref=e89]: Ctrl + Enter 실행
+      - generic [ref=e90]:
+        - button "코드 실행" [disabled] [ref=e91]:
+          - img [ref=e92]
+          - generic [ref=e94]: 코드 실행
+        - button "예시 코드로 되돌리기" [ref=e95] [cursor=pointer]:
+          - img [ref=e96]
+      - generic [ref=e99]: 코드를 작성하고 실행하면 채점 결과가 여기에 표시돼요.
