@@ -1,0 +1,234 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "코드정원 TEACHER WORKSPACE" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - img [ref=e5]
+      - generic [ref=e7]:
+        - text: 코드정원
+        - generic [ref=e8]: TEACHER WORKSPACE
+    - generic [ref=e9]:
+      - generic [ref=e10]: DEMO DATA
+      - button "로그아웃" [ref=e11] [cursor=pointer]
+      - link "문제 풀이로 돌아가기" [ref=e12] [cursor=pointer]:
+        - /url: /
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: PYTHON BASIC / CLASS OVERVIEW
+          - heading "학생들의 배움이 자라는 중이에요." [level=1] [ref=e18]:
+            - text: 학생들의 배움이
+            - text: 자라는 중이에요.
+          - paragraph [ref=e19]: 문제 풀이 진행과 최근 학습 활동을 한눈에 살펴보세요.
+        - generic [ref=e20]:
+          - strong [ref=e21]: 10 PROBLEMS
+          - text: 파이썬 기초 문제를 차근차근 푸는 연습 과정입니다.
+      - generic [ref=e22]:
+        - generic [ref=e23]: i
+        - generic [ref=e24]: 아래 내용은 교사용 화면 미리보기를 위한 더미 학습 기록입니다. 실제 학생의 성적이나 제출 코드는 표시되지 않으며, Auth 계정의 시연용 프로필 정보만 사용합니다.
+      - region "학급 요약" [ref=e25]:
+        - article [ref=e26]:
+          - generic [ref=e27]: 연습 학생
+          - generic [ref=e28]: "5"
+          - generic [ref=e29]: 시연용 계정
+        - article [ref=e30]:
+          - generic [ref=e31]: 평균 문제 완료율
+          - generic [ref=e32]: 52%
+          - generic [ref=e33]: 총 10문제 기준
+        - article [ref=e34]:
+          - generic [ref=e35]: 누적 제출
+          - generic [ref=e36]: "75"
+          - generic [ref=e37]: 테스트 데이터
+        - article [ref=e38]:
+          - generic [ref=e39]: 최근 24시간 활동
+          - generic [ref=e40]: 3 / 5
+          - generic [ref=e41]: 최근 학습 기록 기준
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]:
+              - heading "학생별 학습 현황" [level=2] [ref=e46]
+              - paragraph [ref=e47]: 진도와 학습 중인 주제를 확인하세요.
+            - generic [ref=e48]:
+              - searchbox "학생 이름 검색" [ref=e49]
+              - combobox "학생 필터" [ref=e50]:
+                - option "전체 학생" [selected]
+                - option "최근 활동"
+                - option "진도 50% 이상"
+          - table [ref=e52]:
+            - rowgroup [ref=e53]:
+              - row "학생 01 연습 학생 01 DEMO STUDENT 9 / 10문제 통과 90% 제출 29회 학습 시간 164분 학습 주제 문자열 처리 최근 활동 1시간 전" [ref=e54]:
+                - cell "학생 01 연습 학생 01 DEMO STUDENT" [ref=e55]:
+                  - text: 학생
+                  - generic [ref=e56]:
+                    - generic [ref=e57]: "01"
+                    - generic [ref=e58]:
+                      - strong [ref=e59]: 연습 학생 01
+                      - generic [ref=e60]: DEMO STUDENT
+                - cell "9 / 10문제 통과 90%" [ref=e61]:
+                  - generic [ref=e63]:
+                    - generic [ref=e64]: 9 / 10문제 통과
+                    - generic [ref=e65]: 90%
+                - cell "제출 29회" [ref=e68]
+                - cell "학습 시간 164분" [ref=e69]
+                - cell "학습 주제 문자열 처리" [ref=e70]:
+                  - text: 학습 주제
+                  - generic [ref=e71]: 문자열 처리
+                - cell "최근 활동 1시간 전" [ref=e72]
+              - row "학생 02 연습 학생 02 DEMO STUDENT 7 / 10문제 통과 70% 제출 20회 학습 시간 112분 학습 주제 반복문 최근 활동 3시간 전" [ref=e73]:
+                - cell "학생 02 연습 학생 02 DEMO STUDENT" [ref=e74]:
+                  - text: 학생
+                  - generic [ref=e75]:
+                    - generic [ref=e76]: "02"
+                    - generic [ref=e77]:
+                      - strong [ref=e78]: 연습 학생 02
+                      - generic [ref=e79]: DEMO STUDENT
+                - cell "7 / 10문제 통과 70%" [ref=e80]:
+                  - generic [ref=e82]:
+                    - generic [ref=e83]: 7 / 10문제 통과
+                    - generic [ref=e84]: 70%
+                - cell "제출 20회" [ref=e87]
+                - cell "학습 시간 112분" [ref=e88]
+                - cell "학습 주제 반복문" [ref=e89]:
+                  - text: 학습 주제
+                  - generic [ref=e90]: 반복문
+                - cell "최근 활동 3시간 전" [ref=e91]
+              - row "학생 03 연습 학생 03 DEMO STUDENT 5 / 10문제 통과 50% 제출 13회 학습 시간 77분 학습 주제 조건문 최근 활동 1일 전" [ref=e92]:
+                - cell "학생 03 연습 학생 03 DEMO STUDENT" [ref=e93]:
+                  - text: 학생
+                  - generic [ref=e94]:
+                    - generic [ref=e95]: "03"
+                    - generic [ref=e96]:
+                      - strong [ref=e97]: 연습 학생 03
+                      - generic [ref=e98]: DEMO STUDENT
+                - cell "5 / 10문제 통과 50%" [ref=e99]:
+                  - generic [ref=e101]:
+                    - generic [ref=e102]: 5 / 10문제 통과
+                    - generic [ref=e103]: 50%
+                - cell "제출 13회" [ref=e106]
+                - cell "학습 시간 77분" [ref=e107]
+                - cell "학습 주제 조건문" [ref=e108]:
+                  - text: 학습 주제
+                  - generic [ref=e109]: 조건문
+                - cell "최근 활동 1일 전" [ref=e110]
+              - row "학생 04 연습 학생 04 DEMO STUDENT 3 / 10문제 통과 30% 제출 9회 학습 시간 49분 학습 주제 입력과 자료형 최근 활동 2일 전" [ref=e111]:
+                - cell "학생 04 연습 학생 04 DEMO STUDENT" [ref=e112]:
+                  - text: 학생
+                  - generic [ref=e113]:
+                    - generic [ref=e114]: "04"
+                    - generic [ref=e115]:
+                      - strong [ref=e116]: 연습 학생 04
+                      - generic [ref=e117]: DEMO STUDENT
+                - cell "3 / 10문제 통과 30%" [ref=e118]:
+                  - generic [ref=e120]:
+                    - generic [ref=e121]: 3 / 10문제 통과
+                    - generic [ref=e122]: 30%
+                - cell "제출 9회" [ref=e125]
+                - cell "학습 시간 49분" [ref=e126]
+                - cell "학습 주제 입력과 자료형" [ref=e127]:
+                  - text: 학습 주제
+                  - generic [ref=e128]: 입력과 자료형
+                - cell "최근 활동 2일 전" [ref=e129]
+              - row "학생 05 연습 학생 05 DEMO STUDENT 2 / 10문제 통과 20% 제출 4회 학습 시간 28분 학습 주제 기초 입력 최근 활동 2시간 전" [ref=e130]:
+                - cell "학생 05 연습 학생 05 DEMO STUDENT" [ref=e131]:
+                  - text: 학생
+                  - generic [ref=e132]:
+                    - generic [ref=e133]: "05"
+                    - generic [ref=e134]:
+                      - strong [ref=e135]: 연습 학생 05
+                      - generic [ref=e136]: DEMO STUDENT
+                - cell "2 / 10문제 통과 20%" [ref=e137]:
+                  - generic [ref=e139]:
+                    - generic [ref=e140]: 2 / 10문제 통과
+                    - generic [ref=e141]: 20%
+                - cell "제출 4회" [ref=e144]
+                - cell "학습 시간 28분" [ref=e145]
+                - cell "학습 주제 기초 입력" [ref=e146]:
+                  - text: 학습 주제
+                  - generic [ref=e147]: 기초 입력
+                - cell "최근 활동 2시간 전" [ref=e148]
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - heading "문제별 통과 현황" [level=2] [ref=e153]
+                - paragraph [ref=e154]: 학생들이 어디까지 진행했는지 확인해요.
+              - button "새로고침" [ref=e155] [cursor=pointer]
+            - generic [ref=e156]:
+              - paragraph [ref=e157]:
+                - strong [ref=e158]: "26"
+                - generic [ref=e159]: 전체 통과 기록
+              - generic [ref=e160]:
+                - generic [ref=e161]:
+                  - generic [ref=e162]: 01 인사말 출력하기
+                  - generic [ref=e165]: "5"
+                - generic [ref=e166]:
+                  - generic [ref=e167]: 02 두 수의 합
+                  - generic [ref=e170]: "5"
+                - generic [ref=e171]:
+                  - generic [ref=e172]: 03 직사각형의 넓이
+                  - generic [ref=e175]: "4"
+                - generic [ref=e176]:
+                  - generic [ref=e177]: 04 짝수일까 홀수일까
+                  - generic [ref=e180]: "3"
+                - generic [ref=e181]:
+                  - generic [ref=e182]: 05 세 수 중 가장 큰 수
+                  - generic [ref=e185]: "3"
+                - generic [ref=e186]:
+                  - generic [ref=e187]: 06 1부터 N까지의 합
+                  - generic [ref=e190]: "2"
+                - generic [ref=e191]:
+                  - generic [ref=e192]: 07 구구단 한 줄
+                  - generic [ref=e195]: "2"
+                - generic [ref=e196]:
+                  - generic [ref=e197]: 08 리스트의 평균
+                  - generic [ref=e200]: "1"
+                - generic [ref=e201]:
+                  - generic [ref=e202]: 09 모음 세기
+                  - generic [ref=e205]: "1"
+                - generic [ref=e206]:
+                  - generic [ref=e207]: 10 거꾸로 읽어도 같은 단어
+                  - generic [ref=e209]: "0"
+            - generic [ref=e210]: 문제는 1번부터 10번까지 순서대로 표시됩니다.
+          - generic [ref=e211]:
+            - generic [ref=e213]:
+              - heading "최근 학습 활동" [level=2] [ref=e214]
+              - paragraph [ref=e215]: 더미 계정의 최근 제출 기록입니다.
+            - list [ref=e216]:
+              - listitem [ref=e217]:
+                - generic [ref=e218]: ↻
+                - generic [ref=e219]:
+                  - strong [ref=e220]: 연습 학생 01 · 거꾸로 읽어도 같은 단어
+                  - generic [ref=e221]: 4회 시도 · 1시간 전
+                - generic [ref=e222]: 재도전
+              - listitem [ref=e223]:
+                - generic [ref=e224]: ✓
+                - generic [ref=e225]:
+                  - strong [ref=e226]: 연습 학생 01 · 모음 세기
+                  - generic [ref=e227]: 1회 시도 · 2시간 전
+                - generic [ref=e228]: 통과
+              - listitem [ref=e229]:
+                - generic [ref=e230]: ↻
+                - generic [ref=e231]:
+                  - strong [ref=e232]: 연습 학생 05 · 직사각형의 넓이
+                  - generic [ref=e233]: 2회 시도 · 2시간 전
+                - generic [ref=e234]: 재도전
+              - listitem [ref=e235]:
+                - generic [ref=e236]: ↻
+                - generic [ref=e237]:
+                  - strong [ref=e238]: 연습 학생 02 · 리스트의 평균
+                  - generic [ref=e239]: 3회 시도 · 3시간 전
+                - generic [ref=e240]: 재도전
+              - listitem [ref=e241]:
+                - generic [ref=e242]: ✓
+                - generic [ref=e243]:
+                  - strong [ref=e244]: 연습 학생 01 · 리스트의 평균
+                  - generic [ref=e245]: 2회 시도 · 3시간 전
+                - generic [ref=e246]: 통과
+              - listitem [ref=e247]:
+                - generic [ref=e248]: ✓
+                - generic [ref=e249]:
+                  - strong [ref=e250]: 연습 학생 05 · 두 수의 합
+                  - generic [ref=e251]: 1회 시도 · 4시간 전
+                - generic [ref=e252]: 통과
+      - paragraph [ref=e253]: 현재는 시연용 학습 기록만 표시합니다. 실제 학생 데이터 연결은 별도 단계에서 설정해야 합니다.

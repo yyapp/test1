@@ -8,12 +8,14 @@ const ROOT = __dirname;
 const MAX_BODY_BYTES = 24 * 1024;
 const actions = new Set(['hint', 'error', 'compare', 'concept']);
 const hitCounts = new Map();
+const loginAttempts = new Map();
 
-function sendJson(response, status, data) {
+function sendJson(response, status, data, headers = {}) {
   response.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
-    'X-Content-Type-Options': 'nosniff'
+    'X-Content-Type-Options': 'nosniff',
+    ...headers
   });
   response.end(JSON.stringify(data));
 }
@@ -44,6 +46,143 @@ async function readJson(request) {
     chunks.push(chunk);
   }
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+}
+
+function readCookies(request) {
+  return Object.fromEntries((request.headers.cookie || '').split(';').map(part => {
+    const separator = part.indexOf('=');
+    return separator < 0 ? ['', ''] : [part.slice(0, separator).trim(), decodeURIComponent(part.slice(separator + 1).trim())];
+  }).filter(([name]) => name));
+}
+
+function makeSessionCookies(request, tokens) {
+  const forwardedProtocol = String(request.headers['x-forwarded-proto'] || '').split(',')[0].trim();
+  const secure = forwardedProtocol === 'https' || Boolean(request.socket.encrypted) ? '; Secure' : '';
+  const accessAge = Math.max(60, Number(tokens.expires_in) || 3600);
+  const common = `Path=/api; HttpOnly; SameSite=Strict${secure}`;
+  return [
+    `teacher_access=${encodeURIComponent(tokens.access_token)}; ${common}; Max-Age=${accessAge}`,
+    `teacher_refresh=${encodeURIComponent(tokens.refresh_token)}; ${common}; Max-Age=2592000`
+  ];
+}
+
+function clearSessionCookies(request) {
+  const forwardedProtocol = String(request.headers['x-forwarded-proto'] || '').split(',')[0].trim();
+  const secure = forwardedProtocol === 'https' || Boolean(request.socket.encrypted) ? '; Secure' : '';
+  const common = `Path=/api; HttpOnly; SameSite=Strict${secure}; Max-Age=0`;
+  return [`teacher_access=; ${common}`, `teacher_refresh=; ${common}`];
+}
+
+async function teacherAuthRequest(endpoint, options = {}) {
+  const projectUrl = process.env.SUPABASE_URL;
+  const publishableKey = process.env.SUPABASE_PUBLISHABLE_KEY;
+  if (!projectUrl || !publishableKey) throw new Error('SUPABASE_AUTH_NOT_CONFIGURED');
+  return fetch(new URL(`/auth/v1/${endpoint}`, projectUrl), {
+    ...options,
+    headers: { 'apikey': publishableKey, ...options.headers },
+    signal: AbortSignal.timeout(10_000)
+  });
+}
+
+async function getAuthenticatedTeacher(request, response) {
+  const cookies = readCookies(request);
+  const accessToken = cookies.teacher_access;
+  const refreshToken = cookies.teacher_refresh;
+  if (!accessToken && !refreshToken) return null;
+
+  try {
+    if (accessToken) {
+      const userResponse = await teacherAuthRequest('user', { headers: { 'Authorization': `Bearer ${accessToken}` } });
+      if (userResponse.ok) {
+        const user = await userResponse.json();
+        if (user.app_metadata?.role === 'teacher') return user;
+        response.setHeader('Set-Cookie', clearSessionCookies(request));
+        return null;
+      }
+    }
+
+    if (refreshToken) {
+      const refreshResponse = await teacherAuthRequest('token?grant_type=refresh_token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refresh_token: refreshToken })
+      });
+      if (refreshResponse.ok) {
+        const tokens = await refreshResponse.json();
+        if (tokens.user?.app_metadata?.role === 'teacher') {
+          response.setHeader('Set-Cookie', makeSessionCookies(request, tokens));
+          return tokens.user;
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Teacher session check failed:', error.name || 'Error');
+  }
+
+  response.setHeader('Set-Cookie', clearSessionCookies(request));
+  return null;
+}
+
+function isLoginRateLimited(request) {
+  const key = clientKey(request);
+  const now = Date.now();
+  const recent = (loginAttempts.get(key) || []).filter(time => now - time < 5 * 60_000);
+  if (recent.length >= 8) {
+    loginAttempts.set(key, recent);
+    return true;
+  }
+  recent.push(now);
+  loginAttempts.set(key, recent);
+  return false;
+}
+
+async function loginTeacher(request, response) {
+  if (isLoginRateLimited(request)) {
+    sendJson(response, 429, { error: '로그인 시도가 많아요. 잠시 뒤 다시 시도해 주세요.' });
+    return;
+  }
+  let payload;
+  try {
+    payload = await readJson(request);
+  } catch {
+    sendJson(response, 400, { error: '이메일과 비밀번호를 확인해 주세요.' });
+    return;
+  }
+  if (typeof payload.email !== 'string' || typeof payload.password !== 'string') {
+    sendJson(response, 400, { error: '이메일과 비밀번호를 입력해 주세요.' });
+    return;
+  }
+
+  try {
+    const authResponse = await teacherAuthRequest('token?grant_type=password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: payload.email.trim(), password: payload.password })
+    });
+    if (!authResponse.ok) {
+      sendJson(response, 401, { error: '이메일 또는 비밀번호가 맞지 않아요.' });
+      return;
+    }
+    const tokens = await authResponse.json();
+    if (tokens.user?.app_metadata?.role !== 'teacher') {
+      sendJson(response, 403, { error: '교사 계정만 대시보드에 들어올 수 있어요.' });
+      return;
+    }
+    sendJson(response, 200, { authenticated: true, name: tokens.user.user_metadata?.display_name || '교사' }, { 'Set-Cookie': makeSessionCookies(request, tokens) });
+  } catch (error) {
+    console.error('Teacher login failed:', error.name || 'Error');
+    sendJson(response, 502, { error: '로그인 서비스에 연결하지 못했어요. 잠시 뒤 다시 시도해 주세요.' });
+  }
+}
+
+async function logoutTeacher(request, response) {
+  const accessToken = readCookies(request).teacher_access;
+  if (accessToken) {
+    try {
+      await teacherAuthRequest('logout', { method: 'POST', headers: { 'Authorization': `Bearer ${accessToken}` } });
+    } catch {}
+  }
+  sendJson(response, 200, { authenticated: false }, { 'Set-Cookie': clearSessionCookies(request) });
 }
 
 function tutorMessages(payload) {
@@ -214,7 +353,12 @@ async function checkSupabase(response) {
   }
 }
 
-async function getDemoStudents(response) {
+async function getDemoStudents(request, response) {
+  const teacher = await getAuthenticatedTeacher(request, response);
+  if (!teacher) {
+    sendJson(response, 401, { error: '교사 계정으로 로그인해 주세요.' });
+    return;
+  }
   const projectUrl = process.env.SUPABASE_URL;
   const secretKey = process.env.SUPABASE_SECRET_KEY;
   if (!projectUrl || !secretKey) {
@@ -287,12 +431,25 @@ async function serveFile(pathname, response) {
 
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || 'localhost'}`);
+  if (request.method === 'POST' && url.pathname === '/api/teacher/login') {
+    await loginTeacher(request, response);
+    return;
+  }
+  if (request.method === 'POST' && url.pathname === '/api/teacher/logout') {
+    await logoutTeacher(request, response);
+    return;
+  }
+  if (request.method === 'GET' && url.pathname === '/api/teacher/session') {
+    const teacher = await getAuthenticatedTeacher(request, response);
+    sendJson(response, 200, { authenticated: Boolean(teacher), name: teacher?.user_metadata?.display_name || null });
+    return;
+  }
   if (request.method === 'GET' && url.pathname === '/api/supabase-status') {
     await checkSupabase(response);
     return;
   }
   if (request.method === 'GET' && url.pathname === '/api/teacher/students') {
-    await getDemoStudents(response);
+    await getDemoStudents(request, response);
     return;
   }
   if (request.method === 'POST' && url.pathname === '/api/tutor') {

@@ -1,0 +1,30 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "코드정원 TEACHER WORKSPACE" [ref=e3] [cursor=pointer]:
+      - /url: /
+      - img [ref=e5]
+      - generic [ref=e7]:
+        - text: 코드정원
+        - generic [ref=e8]: TEACHER WORKSPACE
+    - generic [ref=e9]:
+      - generic [ref=e10]: 교사 로그인
+      - link "문제 풀이로 돌아가기" [ref=e11] [cursor=pointer]:
+        - /url: /
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: ↗
+      - generic [ref=e15]: TEACHER ACCESS
+      - heading "교사용 계정으로 로그인해 주세요." [level=1] [ref=e16]:
+        - text: 교사용 계정으로
+        - text: 로그인해 주세요.
+      - paragraph [ref=e17]: 교사 역할이 확인된 계정만 학습 대시보드를 볼 수 있어요.
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: 이메일
+          - textbox "이메일" [ref=e21]:
+            - /placeholder: 교사 계정 이메일
+        - generic [ref=e22]:
+          - generic [ref=e23]: 비밀번호
+          - textbox "비밀번호" [ref=e24]
+        - button "교사로 로그인" [ref=e25] [cursor=pointer]
+      - paragraph [ref=e26]: 학생 계정은 로그인할 수 없어요. Supabase에서 교사 역할을 확인합니다.

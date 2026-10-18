@@ -16,13 +16,27 @@
     @media(max-width:700px){.topbar{height:62px;padding:0 14px}.top-right{gap:7px}.demo-badge{font-size:8px;padding:5px 7px}.back-link{font-size:10px;padding:7px 8px}.brand{font-size:15px}.brand-mark{width:29px;height:29px}.brand small{font-size:8px}.topbar{position:static}main{padding:23px 14px 42px}.intro{grid-template-columns:1fr;gap:14px}.intro h1{font-size:34px}.intro p{font-size:12px}.intro-aside{justify-self:stretch;max-width:none;border-left:2px solid #52624d;padding:2px 0 2px 11px;font-size:10px}.intro-aside strong{display:inline;margin-right:6px;font-size:16px}.demo-note{font-size:10px;padding:10px 11px}.kpi-grid{grid-template-columns:1fr 1fr;gap:8px}.kpi{min-height:88px;padding:12px}.kpi-value{font-size:22px}.dashboard-grid{gap:12px}.side-stack{grid-template-columns:1fr;gap:12px}.panel-head{padding:13px 12px}.panel-head h2{font-size:13px}.panel-head p{font-size:9px}.filters{gap:5px}.search{width:min(36vw,130px);height:32px}.select{max-width:122px;height:32px;font-size:10px}.student-table,.student-table tbody{display:block}.student-table thead{display:none}.student-table tr{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;padding:12px;border-top:1px solid #27332a}.student-table td{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0;border:0;font-size:10px}.student-table td:before{content:attr(data-label);color:#748176;font-size:9px}.student-table td:first-child,.student-table td:nth-child(2){grid-column:1/-1}.student-table td:first-child{justify-content:flex-start}.student-table td:nth-child(2){display:block}.student-table td:nth-child(2):before{display:none}.student-name{min-width:0}.progress-cell{width:100%}.progress-top{font-size:9px}.progress-cell:before{content:none!important}.progress-track{height:5px}.bar-item{grid-template-columns:86px 1fr 24px}.table-wrap{overflow:visible}.footer-note{font-size:9px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
   </style>
+  <style>
+    .login-shell{width:min(100%,460px);margin:clamp(54px,12vh,120px) auto 70px;padding:28px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(150deg,#1b251e,#151b17);box-shadow:0 24px 70px #0003}.login-shell[hidden],#dashboardContent[hidden]{display:none!important}.login-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#2c3b2d;color:var(--green);font-size:17px;margin-bottom:17px}.login-kicker{font:10px var(--mono);color:var(--green);letter-spacing:.14em}.login-shell h1{font-size:28px;letter-spacing:-.05em;margin:8px 0}.login-copy{font-size:12px;color:var(--muted);margin:0 0 22px}.login-form{display:grid;gap:13px}.login-field{display:grid;gap:6px}.login-field label{font-size:11px;color:#c5d0c5}.login-field input{width:100%;height:44px;border:1px solid #3a473d;border-radius:8px;background:#101612;padding:0 12px;color:var(--text);font-size:13px}.login-field input::placeholder{color:#69756b}.login-submit{height:46px;border:0;border-radius:8px;background:var(--green);color:#1b2617;font-weight:700;font-size:13px;cursor:pointer;margin-top:3px}.login-submit:hover:not(:disabled){background:#c9ffa2}.login-submit:disabled{opacity:.6;cursor:wait}.login-error{display:none;color:#ffc2bb;background:#382724;border:1px solid #633d38;border-radius:8px;padding:9px 11px;font-size:11px}.login-hint{margin:15px 0 0;font-size:10px;color:var(--soft);line-height:1.6}.logout-button{min-height:36px;border:1px solid #455348;border-radius:7px;background:#1b231d;color:#d4dfd4;padding:6px 10px;font-size:10px;cursor:pointer}.logout-button:hover{border-color:#7a8b72;color:var(--green)}.teacher-name{font-size:10px;color:#c4d0c4}.teacher-name[hidden],.logout-button[hidden]{display:none}
+    @media(max-width:700px){.login-shell{margin:52px auto;padding:22px}.teacher-name{display:none}}
+  </style>
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="/"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><span>코드정원<small>TEACHER WORKSPACE</small></span></a>
-    <div class="top-right"><span class="demo-badge">DEMO DATA</span><a class="back-link" href="/">문제 풀이로 돌아가기</a></div>
+    <div class="top-right"><span class="demo-badge" id="accessBadge">교사 로그인</span><span class="teacher-name" id="teacherName" hidden></span><button class="logout-button" id="logoutButton" type="button" hidden>로그아웃</button><a class="back-link" href="/">문제 풀이로 돌아가기</a></div>
   </header>
   <main>
+    <section class="login-shell" id="loginPanel">
+      <span class="login-mark" aria-hidden="true">↗</span><div class="login-kicker">TEACHER ACCESS</div><h1>교사용 계정으로<br>로그인해 주세요.</h1><p class="login-copy">교사 역할이 확인된 계정만 학습 대시보드를 볼 수 있어요.</p>
+      <form class="login-form" id="loginForm">
+        <div class="login-field"><label for="teacherEmail">이메일</label><input id="teacherEmail" name="email" type="email" autocomplete="username" placeholder="교사 계정 이메일" required></div>
+        <div class="login-field"><label for="teacherPassword">비밀번호</label><input id="teacherPassword" name="password" type="password" autocomplete="current-password" placeholder="비밀번호" required></div>
+        <div class="login-error" id="loginError" role="alert"></div><button class="login-submit" id="loginSubmit" type="submit">교사로 로그인</button>
+      </form>
+      <p class="login-hint">학생 계정은 로그인할 수 없어요. Supabase에서 교사 역할을 확인합니다.</p>
+    </section>
+    <div id="dashboardContent" hidden>
     <section class="intro">
       <div><div class="eyebrow">PYTHON BASIC / CLASS OVERVIEW</div><h1>학생들의 배움이<br>자라는 중이에요.</h1><p>문제 풀이 진행과 최근 학습 활동을 한눈에 살펴보세요.</p></div>
       <div class="intro-aside"><strong>10 PROBLEMS</strong>파이썬 기초 문제를 차근차근 푸는 연습 과정입니다.</div>
@@ -52,11 +66,14 @@
         </section>
       </div>
     </div>
-    <p class="footer-note">시연 화면입니다. 학생 로그인과 실제 학습 데이터 연결은 별도 단계에서 설정해야 합니다.</p>
+    <p class="footer-note">현재는 시연용 학습 기록만 표시합니다. 실제 학생 데이터 연결은 별도 단계에서 설정해야 합니다.</p>
+    </div>
   </main>
   <script>
     const problemTitles=['인사말 출력하기','두 수의 합','직사각형의 넓이','짝수일까 홀수일까','세 수 중 가장 큰 수','1부터 N까지의 합','구구단 한 줄','리스트의 평균','모음 세기','거꾸로 읽어도 같은 단어'];
     const $=id=>document.getElementById(id);let students=[];
+    function showLogin(message=''){$('loginPanel').hidden=false;$('dashboardContent').hidden=true;$('accessBadge').textContent='교사 로그인';$('teacherName').hidden=true;$('logoutButton').hidden=true;$('loginError').textContent=message;$('loginError').style.display=message?'block':'none'}
+    async function showDashboard(name){$('loginPanel').hidden=true;$('dashboardContent').hidden=false;$('accessBadge').textContent='DEMO DATA';$('teacherName').textContent=name||'교사';$('teacherName').hidden=false;$('logoutButton').hidden=false;await loadDashboard()}
     function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
     function minutesAgo(date){if(!date)return '기록 없음';const minutes=Math.max(0,Math.floor((Date.now()-new Date(date).getTime())/60000));if(minutes<1)return '방금 전';if(minutes<60)return `${minutes}분 전`;const hours=Math.floor(minutes/60);if(hours<24)return `${hours}시간 전`;const days=Math.floor(hours/24);return `${days}일 전`}
     function matchesFilter(student){const query=$('searchInput').value.trim().toLowerCase(),filter=$('filterSelect').value;const progress=student.solvedProblemIds.length/10;if(query&&!student.name.toLowerCase().includes(query))return false;if(filter==='active'&&(!student.lastActiveAt||Date.now()-new Date(student.lastActiveAt).getTime()>24*60*60*1000))return false;if(filter==='progress'&&progress<.5)return false;return true}
@@ -76,11 +93,15 @@
     }
     async function loadDashboard(){
       $('refreshButton').disabled=true;$('refreshButton').textContent='불러오는 중';$('loadError').style.display='none';
-      try{const response=await fetch('/api/teacher/students',{cache:'no-store'});const data=await response.json();if(!response.ok)throw new Error(data.error||'학습 기록을 불러오지 못했어요.');students=data.students||[];renderSummary();renderRows();renderBars();renderActivity()}
+      try{const response=await fetch('/api/teacher/students',{cache:'no-store',credentials:'same-origin'});const data=await response.json();if(response.status===401){showLogin(data.error||'다시 로그인해 주세요.');return}if(!response.ok)throw new Error(data.error||'학습 기록을 불러오지 못했어요.');students=data.students||[];renderSummary();renderRows();renderBars();renderActivity()}
       catch(error){$('loadError').textContent=error.message||'학습 기록을 불러오지 못했어요.';$('loadError').style.display='block';$('studentRows').innerHTML='<tr><td colspan="6" class="empty-row">연결을 확인한 뒤 새로고침을 눌러주세요.</td></tr>';$('problemBars').innerHTML='<div class="loading-state">기록을 불러오지 못했어요.</div>';$('activityList').innerHTML='<li class="loading-state">활동 기록을 불러오지 못했어요.</li>'}
       finally{$('refreshButton').disabled=false;$('refreshButton').textContent='새로고침'}
     }
-    $('searchInput').addEventListener('input',renderRows);$('filterSelect').addEventListener('change',renderRows);$('refreshButton').addEventListener('click',loadDashboard);loadDashboard();
+    $('searchInput').addEventListener('input',renderRows);$('filterSelect').addEventListener('change',renderRows);$('refreshButton').addEventListener('click',loadDashboard);
+    $('loginForm').addEventListener('submit',async event=>{event.preventDefault();const button=$('loginSubmit');button.disabled=true;button.textContent='확인 중';$('loginError').style.display='none';try{const response=await fetch('/api/teacher/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify({email:$('teacherEmail').value,password:$('teacherPassword').value})});const data=await response.json();if(!response.ok)throw new Error(data.error||'로그인하지 못했어요.');$('loginForm').reset();await showDashboard(data.name)}catch(error){$('loginError').textContent=error.message||'로그인에 실패했어요.';$('loginError').style.display='block'}finally{button.disabled=false;button.textContent='교사로 로그인'}});
+    $('logoutButton').addEventListener('click',async()=>{try{await fetch('/api/teacher/logout',{method:'POST',credentials:'same-origin'})}finally{showLogin('로그아웃했어요.')}});
+    async function checkTeacherSession(){try{const response=await fetch('/api/teacher/session',{credentials:'same-origin',cache:'no-store'});const data=await response.json();if(response.ok&&data.authenticated)await showDashboard(data.name);else showLogin()}catch{showLogin('로그인 상태를 확인하지 못했어요. 새로고침해 주세요.')}}
+    checkTeacherSession();
   </script>
 </body>
 </html>
