@@ -2,6 +2,8 @@ const http = require('node:http');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 
+delete process.env.SUPABASE_SECRET_KEY;
+
 const PORT = Number(process.env.PORT || 3000);
 const HOST = '0.0.0.0';
 const ROOT = __dirname;

@@ -1,0 +1,129 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - img [ref=e5]
+      - generic [ref=e7]:
+        - text: 코드정원
+        - generic [ref=e8]: PYTHON PRACTICE ROOM
+    - generic [ref=e9]:
+      - generic [ref=e11]: 2 / 10
+      - generic "학습자" [ref=e12]: 나
+  - main [ref=e13]:
+    - complementary "문제 목록" [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: PYTHON · BASIC
+        - heading "첫 번째 파이썬 정원" [level=2] [ref=e17]
+        - paragraph [ref=e18]: 차근차근 풀어보는 10개의 문제
+        - generic [ref=e21]:
+          - generic [ref=e22]: 나의 진행률
+          - generic [ref=e23]: 2 / 10 완료
+        - generic [ref=e24]:
+          - generic [ref=e27]: Supabase 연결 확인 중
+          - button "다시 확인" [disabled] [ref=e28]
+        - paragraph [ref=e29]: 현재는 연결 상태만 확인합니다. 로그인과 진도 저장은 아직 설정하지 않았어요.
+        - text: "{}"
+      - navigation [ref=e30]:
+        - button "01 인사말 출력하기" [ref=e31] [cursor=pointer]:
+          - generic [ref=e32]: "01"
+          - generic [ref=e33]: 인사말 출력하기
+        - button "02 두 수의 합" [ref=e34] [cursor=pointer]:
+          - generic [ref=e35]: "02"
+          - generic [ref=e36]: 두 수의 합
+        - button "03 직사각형의 넓이" [ref=e37] [cursor=pointer]:
+          - generic [ref=e38]: "03"
+          - generic [ref=e39]: 직사각형의 넓이
+        - button "04 짝수일까 홀수일까" [ref=e40] [cursor=pointer]:
+          - generic [ref=e41]: "04"
+          - generic [ref=e42]: 짝수일까 홀수일까
+        - button "05 세 수 중 가장 큰 수" [ref=e43] [cursor=pointer]:
+          - generic [ref=e44]: "05"
+          - generic [ref=e45]: 세 수 중 가장 큰 수
+        - button "06 1부터 N까지의 합" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]: "06"
+          - generic [ref=e48]: 1부터 N까지의 합
+        - button "07 구구단 한 줄" [ref=e49] [cursor=pointer]:
+          - generic [ref=e50]: "07"
+          - generic [ref=e51]: 구구단 한 줄
+        - button "08 리스트의 평균" [ref=e52] [cursor=pointer]:
+          - generic [ref=e53]: "08"
+          - generic [ref=e54]: 리스트의 평균
+        - button "09 모음 세기" [ref=e55] [cursor=pointer]:
+          - generic [ref=e56]: "09"
+          - generic [ref=e57]: 모음 세기
+        - button "10 거꾸로 읽어도 같은 단어" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]: "10"
+          - generic [ref=e60]: 거꾸로 읽어도 같은 단어
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]: 파이썬 기초 / 01
+        - generic [ref=e64]:
+          - heading "인사말 출력하기" [level=1] [ref=e65]
+          - generic [ref=e66]: 기초
+        - paragraph [ref=e67]: print()로 첫 문장을 화면에 보여줘요
+      - generic [ref=e68]: 친구에게 건넬 인사말을 출력해 봅시다. 아래 문장을 그대로 한 줄로 출력하는 프로그램을 작성하세요. 출력할 때 문장 앞뒤에 다른 글자는 붙이지 마세요.
+      - heading "예시" [level=2] [ref=e69]
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]: 입력 예시
+          - generic [ref=e73]: 출력 예시
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]: Input
+            - generic [ref=e77]: (입력 없음)
+          - generic [ref=e78]:
+            - generic [ref=e79]: Output
+            - generic [ref=e80]: 안녕, 파이썬! 반가워.
+      - generic [ref=e81]: 생각해 보기 print() 함수에 출력하고 싶은 문장을 따옴표로 감싸 넣어보세요.
+      - region "AI 튜터 도움말" [ref=e82]:
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]: ✳
+            - text: AI 튜터
+          - generic [ref=e86]: SOLAR MINI 4
+        - paragraph [ref=e87]: 도움 요청 시 문제와 코드가 Upstage Solar로 전달돼요. 자유 채팅은 없어요.
+        - generic [ref=e88]:
+          - button "힌트 보기" [ref=e89] [cursor=pointer]
+          - button "오류 설명" [ref=e90] [cursor=pointer]
+          - button "결과 비교" [ref=e91] [cursor=pointer]
+          - button "개념 복습" [ref=e92] [cursor=pointer]
+      - generic [ref=e93]:
+        - button "← 이전 문제" [disabled] [ref=e94]
+        - button "다음 문제 →" [ref=e95] [cursor=pointer]
+    - region "파이썬 코드 편집기" [ref=e96]:
+      - generic [ref=e97]:
+        - generic [ref=e98]: solution.py
+        - generic [ref=e100]:
+          - generic [ref=e101]: Python 3
+          - generic [ref=e102]: ·
+          - generic [ref=e103]: UTF-8
+      - generic [ref=e104]:
+        - generic [ref=e105]:
+          - generic [ref=e106]: "1"
+          - generic [ref=e107]: "2"
+          - generic [ref=e108]: "3"
+          - generic [ref=e109]: "4"
+          - generic [ref=e110]: "5"
+          - generic [ref=e111]: "6"
+          - generic [ref=e112]: "7"
+          - generic [ref=e113]: "8"
+          - generic [ref=e114]: "9"
+          - generic [ref=e115]: "10"
+          - generic [ref=e116]: "11"
+          - generic [ref=e117]: "12"
+          - generic [ref=e118]: "13"
+          - generic [ref=e119]: "14"
+          - generic [ref=e120]: "15"
+          - generic [ref=e121]: "16"
+          - generic [ref=e122]: "17"
+          - generic [ref=e123]: "18"
+        - textbox "파이썬 코드 입력" [ref=e124]: "# 인사말을 출력해 보세요"
+      - generic [ref=e125]:
+        - generic [ref=e126]: Tab 키로 들여쓰기
+        - generic [ref=e127]: Ctrl + Enter 실행
+      - generic [ref=e128]:
+        - button "코드 실행" [ref=e129] [cursor=pointer]:
+          - img [ref=e130]
+          - generic [ref=e132]: 코드 실행
+        - button "예시 코드로 되돌리기" [ref=e133] [cursor=pointer]:
+          - img [ref=e134]
+      - generic [ref=e137]: 코드를 작성하고 실행하면 채점 결과가 여기에 표시돼요.
